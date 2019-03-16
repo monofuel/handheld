@@ -117,6 +117,13 @@ module pitft() {
      translate([12.0, 14, -2])
         rotate([0,90,270])
         pin_headers(2, 13);
+        
+     color("white")
+        translate([7,5,0])
+        cube([42.5,60,2.75]);
+     color("black")
+        translate([8,6,2.75])
+        cube([40,51,0.5]);
 }
 
 module button() {
@@ -164,13 +171,66 @@ module controller() {
         
 }
 
-translate([5,5,5])
+module top_half() {
   board_raspberrypi_model_a_plus_rev1_1();
-
-translate([5,5,18])
+  translate([0,0,14])
     pitft();
-translate([64,5,15])
-    controller();
+}
+
+module hardware() {
+ 
+translate([60,70,0])
+rotate(180)
+    top_half();
+translate([64,6,15])
+    controller();   
+}
+
+
+//rotate([180,0,0])
+//    translate([0,-70,0])
+//    hardware();
+
+module corner(dia) {
+    hull() {
+     circle(d=dia);
+     translate([10,0])  circle(d=dia);
+     translate([0,10])  circle(d=dia);
+     translate([10,10]) circle(d=dia);
+    }
+}
+
+module dpad() {
+    
+    g = 7.5;
+    
+    // do this part in solid plastic
+    color("blue")
+    linear_extrude(2)
+    difference() {
+        circle(d=20);
+        translate([g,g]) corner(8);
+         rotate(90) translate([g,g]) corner(8);
+        rotate(180) translate([g,g]) corner(8);
+        rotate(270) translate([g,g]) corner(8);
+    }
+    
+    // do this part in flex plastic
+    color("green")
+    // linear_extrude(1)
+    translate([0,0,0.5])
+        circle(d=24,h=1);
+}
+
+module dpad_cutout() {
+    cube([30,30,1], center=true);
+}
+
+
+dpad();
+dpad_cutout();
+
+
 
 // sizes in mm
 
