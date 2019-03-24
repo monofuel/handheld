@@ -130,9 +130,11 @@ module switch() {
     color("black")
         cube([7.75,7.75,2.66]);
     $fn=10;
+    // actual height is 2.75, but the buttons are squishy
+    // h=2.75
     color("gray")
         translate([7.75/2,7.75/2,2.66])
-        cylinder(d=3.5,h=2.75);
+        cylinder(d=3.5,h=2);
 }
 
 module switches() {
@@ -172,30 +174,44 @@ module controller() {
 }
 
 module top_half() {
-  board_raspberrypi_model_a_plus_rev1_1();
+  // board_raspberrypi_model_a_plus_rev1_1();
   translate([0,0,14])
     pitft();
 }
 
 module hardware() {
  
-translate([60,70,0])
-rotate(180)
-    top_half();
-translate([64,6,15])
-    controller();   
+    translate([60,70,0])
+    rotate(180)
+        top_half();
+    translate([64,6,14])
+        controller();  
+    // translate([64,6,2])
+    //      battery(); 
+    // translate([120,70,0])
+    // rotate(180)
+    // powerboost();
+}
+
+module hardware_front() {
+
+ translate([60,70,14])
+    rotate(180)
+        pitft();
+    translate([64,6,14])
+        controller();     
 }
 
 module dpad_plus(g) {
     $fn=30;
-    corners = 10;
+    corners = 9;
     linear_extrude(1)
     difference() {
         square(24, center=true);
-        translate([g,g]) square(10, center=true);
-         rotate(90) translate([g,g]) square(10, center=true);
-        rotate(180) translate([g,g]) square(10, center=true);
-        rotate(270) translate([g,g]) square(10, center=true);
+        translate([g,g]) square(corners, center=true);
+         rotate(90) translate([g,g]) square(corners, center=true);
+        rotate(180) translate([g,g]) square(corners, center=true);
+        rotate(270) translate([g,g]) square(corners, center=true);
     }
 }
 
@@ -286,18 +302,39 @@ module buttons_cutout() {
     }
 }
 
+module option_buttons_flex() {
+    translate([5,5,0]) button_flex();
+    translate([5,25,0]) button_flex();
+    translate([5,35,0]) button_flex();
+    translate([5,55,0]) button_flex();
+}
+module option_buttons_cutout() {
+    difference() {
+        cube([10,60,1]);
+        translate([5,5,0]) button_cutout();
+        translate([5,25,0]) button_cutout();
+        translate([5,35,0]) button_cutout();
+        translate([5,55,0]) button_cutout();
+        option_buttons_flex();
+    }
+}
+
+module option_buttons() {
+     translate([5,5,0]) button();
+        translate([5,25,0]) button();
+        translate([5,35,0]) button();
+        translate([5,55,0]) button();
+}
+
 // buttons();
 // buttons_cutout();
 
 // dpad();
 // dpad_cutout();
 
-
-//hardware();
-
 module front_case() {
     union() {
-        translate([80,22.5,20]) {
+        translate([80,22.5,18]) {
             difference() {
                 dpad();
                 dpad_flex();
@@ -306,7 +343,7 @@ module front_case() {
             dpad_flex();
         }
 
-        translate([80,52.5,20]) {
+        translate([80,52.5,18]) {
             difference(){
                 
                 buttons();
@@ -315,12 +352,147 @@ module front_case() {
             buttons_cutout();
             buttons_flex();
         }
+         translate([95,7.5,18]) {
+            difference(){
+                
+                option_buttons();
+                option_buttons_flex();
+            }
+            option_buttons_cutout();
+            option_buttons_flex();
+        }
+        translate([65,3,16])
+        cube([40,4.5,3]);
+        translate([65,67.5,16])
+        cube([40,4.5,3]);
+        
+        translate([105,3,16])
+        cube([4,69,3]);
+        
+        // TODO top button holes
+        translate([0,3,18])
+        difference() {
+            translate([2,0,0])
+            cube([63,69,1]);
+            translate([12,10,-1])
+            cube([40,51,5]);
+        }
+        
+         translate([7.5,8.5,16])
+            rotate([0,180,0])
+            screw_mount();
+        translate([7.5,8.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([7.5,8.5,10])
+            rotate([0,180,0])
+            screw();
+        
+        translate([56.5,8.5,16])
+            rotate([0,180,0])
+            screw_mount();
+         translate([56.5,8.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([56.5,8.5,10])
+            rotate([0,180,0])
+            screw();
+        
+         translate([7.5,66.5,16])
+            rotate([0,180,0])
+            screw_mount();
+        translate([7.5,66.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([7.5,66.5,10])
+            rotate([0,180,0])
+            screw();
+        
+        translate([56.5,66.5,16])
+            rotate([0,180,0])
+            screw_mount();
+         translate([56.5,66.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([56.5,66.5,10])
+            rotate([0,180,0])
+            screw();
+        
+       
     }
 }
+
+module screw() {
+    // 4-40x3/8th screws
+    $fn=30;
+    width = 2.7;
+    thread_height = 7.46;
+    head_height = 2;
+    head_width = 5.2;
+    color("grey")
+    cylinder(h=head_height, d1=width, d2=head_width, center=true);
+    color("grey")
+    translate([0,0,-4])
+    cylinder(h=thread_height, d=width, center=true);
+   
+}
+
+
+module screw_mount() {
+    $fn=30;
+    thread_height = 7.46;
+    width = 2.6; // undersized
+    difference() {
+        cube([6,6,4], center=true);
+        translate([0,0,1])
+        cylinder(h=thread_height, d=width, center=true);
+    }
+}
+module battery() {
+    color("grey")
+    cube([37,60,7.24]);
+}
+module powerboost() {
+     
+    x  = 23;     y = 36;    z = 1.60;
+    translate([0, 0, -z]) {
+            color("blue") linear_extrude(height=z)
+                difference() {
+                    hull() {
+                        translate([  3,   3]) circle(r=3);
+                        translate([x-3,   3]) circle(r=3);
+                        translate([x-3, y-3]) circle(r=3);
+                        translate([  3, y-3]) circle(r=3);
+                    }
+        translate([3.5, 3.5])            circle(r=(2.75 / 2), $fn=16);
+        translate([(x - 3.5), 3.5])      circle(r=(2.75 / 2), $fn=16);
+        translate([3.5, y-3.5])       circle(r=(2.75 / 2), $fn=16);
+        translate([(x - 3.5), y-3.5]) circle(r=(2.75 / 2), $fn=16);
+                    
+                }
+        }
+        mx =  5.60; my =  7.6; mz = 2.40;  // Measured micro USB power connector size
+        translate([15, 0, 0])
+        rotate(90)microusb_connector(mx, my, mz);
+        
+        color("black")
+        translate([0,8,0])
+            cube([6.2,8,5.5]);
+}
+
+module washer(h=3,d=5) {
+    $fn=30;
+    
+    difference() {
+
+        cylinder(h=h,d=d, center=true);
+        translate([0,0,1])
+        screw();
+    }
+}
+
+hardware_front();
 front_case();
-
-
-
 
 // sizes in mm
 
