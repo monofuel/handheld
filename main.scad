@@ -126,7 +126,7 @@ module pitft() {
         cube([40,51,0.5]);
 }
 
-module button() {
+module switch() {
     color("black")
         cube([7.75,7.75,2.66]);
     $fn=10;
@@ -135,14 +135,14 @@ module button() {
         cylinder(d=3.5,h=2.75);
 }
 
-module buttons() {
-      translate([2.5*5,2.5,0])  button();
-        translate([2.5,2.5*5,0])  button();
-        translate([2.5*5,2.5*9,0])  button();
-        translate([2.5*9,2.5*5,0])  button();
+module switches() {
+      translate([2.5*5,2.5,0])  switch();
+        translate([2.5,2.5*5,0])  switch();
+        translate([2.5*5,2.5*9,0])  switch();
+        translate([2.5*9,2.5*5,0])  switch();
         
-        translate([2.5*12,2.5,0])  button();
-        translate([2.5*12,2.5*9,0])  button();
+        translate([2.5*12,2.5,0])  switch();
+        translate([2.5*12,2.5*9,0])  switch();
 }
 
 module controller() {
@@ -164,10 +164,10 @@ module controller() {
                     }
                 }
         }
-       buttons();
+       switches();
         
         translate([0,2.5*12,0])
-            buttons();
+            switches();
         
 }
 
@@ -186,49 +186,139 @@ translate([64,6,15])
     controller();   
 }
 
-
-//rotate([180,0,0])
-//    translate([0,-70,0])
-//    hardware();
-
-module corner(dia) {
-    hull() {
-     circle(d=dia);
-     translate([10,0])  circle(d=dia);
-     translate([0,10])  circle(d=dia);
-     translate([10,10]) circle(d=dia);
+module dpad_plus(g) {
+    $fn=30;
+    corners = 10;
+    linear_extrude(1)
+    difference() {
+        square(24, center=true);
+        translate([g,g]) square(10, center=true);
+         rotate(90) translate([g,g]) square(10, center=true);
+        rotate(180) translate([g,g]) square(10, center=true);
+        rotate(270) translate([g,g]) square(10, center=true);
     }
+}
+
+dpad_depth = -0.3;
+
+module dpad_flex() {
+    color("blue")
+    // linear_extrude(1)
+     translate([0,0,dpad_depth])
+        scale([1.2,1.2,0.6])
+        dpad_plus(10);
 }
 
 module dpad() {
-    
-    g = 7.5;
+   
     
     // do this part in solid plastic
-    color("blue")
-    linear_extrude(2)
     difference() {
-        circle(d=20);
-        translate([g,g]) corner(8);
-         rotate(90) translate([g,g]) corner(8);
-        rotate(180) translate([g,g]) corner(8);
-        rotate(270) translate([g,g]) corner(8);
+    dpad_plus(7.5);
+          translate([0,0,dpad_depth])
+        scale([1.2,1.2,0.6])
+        dpad_plus(10);
     }
-    
-    // do this part in flex plastic
-    color("green")
-    // linear_extrude(1)
-    translate([0,0,0.5])
-        circle(d=24,h=1);
 }
 
 module dpad_cutout() {
-    cube([30,30,1], center=true);
+    difference() {
+        translate([0,0,0.5])
+        cube([30,30,1], center=true);
+        translate([0,0,-1])
+        scale([1.1,1.1,3])
+        dpad_plus(8);
+       translate([0,0,dpad_depth])
+        scale([1.2,1.2,0.6])
+        dpad_plus(10);
+    }
 }
 
+button_spread=10;
+button_size = 3;
 
-dpad();
-dpad_cutout();
+module button_flex() {
+     $fn=30;
+     color("blue")
+     translate([0,0,0])
+        scale([1.6,1.6,0.6])
+        circle(button_size);
+}
+
+module button() {
+     $fn=30;
+    
+    linear_extrude(1)
+    circle(button_size);
+}
+
+module button_cutout() {
+     $fn=30;
+    
+    linear_extrude(2)
+    circle(button_size * 1.4);
+}
+
+module buttons_flex() {
+    translate([0,button_spread,0]) button_flex();
+    translate([button_spread,0,0]) button_flex();
+    translate([0,-button_spread,0]) button_flex();
+    translate([-button_spread,0,0]) button_flex();
+}
+
+module buttons() {
+    translate([0,button_spread,0]) button();
+    translate([button_spread,0,0]) button();
+    translate([0,-button_spread,0]) button();
+    translate([-button_spread,0,0]) button();
+}
+
+module buttons_cutout() {
+    difference() {
+        translate([0,0,0.5])
+            cube([30,30,1], center=true);
+            
+        translate([0,button_spread,0]) button_cutout();
+        translate([button_spread,0,0]) button_cutout();
+        translate([0,-button_spread,0]) button_cutout();
+        translate([-button_spread,0,0]) button_cutout();
+        buttons_flex();
+    }
+}
+
+// buttons();
+// buttons_cutout();
+
+// dpad();
+// dpad_cutout();
+
+
+//hardware();
+
+module front_case() {
+    union() {
+        translate([80,22.5,20]) {
+            difference() {
+                dpad();
+                dpad_flex();
+            }
+            dpad_cutout();
+            dpad_flex();
+        }
+
+        translate([80,52.5,20]) {
+            difference(){
+                
+                buttons();
+                buttons_flex();
+            }
+            buttons_cutout();
+            buttons_flex();
+        }
+    }
+}
+front_case();
+
 
 
 
