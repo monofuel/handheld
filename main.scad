@@ -1,4 +1,14 @@
 
+// TODO
+// add pitft buttons
+// add L/R buttons
+// sd card cutout
+// check how to print buttons
+
+// V2
+// psp joystick
+// L2 / R2
+
 // some stuff borrowed from https://github.com/RigacciOrg/openscad-rpi-library
 
 //------------------------------------------------------------------------
@@ -179,27 +189,25 @@ module top_half() {
     pitft();
 }
 
-module hardware() {
- 
+module hardware_back() {
+     //translate([64,6,2])
+     //    battery(); 
+     translate([124,72,3])
+         rotate(180)
+         powerboost();
     translate([60,70,0])
     rotate(180)
-        top_half();
-    translate([64,6,14])
-        controller();  
-    // translate([64,6,2])
-    //      battery(); 
-    // translate([120,70,0])
-    // rotate(180)
-    // powerboost();
+        board_raspberrypi_model_a_plus_rev1_1(); 
+       
 }
 
 module hardware_front() {
-
  translate([60,70,14])
     rotate(180)
         pitft();
     translate([64,6,14])
-        controller();     
+       controller();     
+    
 }
 
 module dpad_plus(g) {
@@ -268,6 +276,41 @@ module button() {
     circle(button_size);
 }
 
+module square_button(button) {
+    cube([6,6,1], center=true);
+}
+
+module square_button_flex() {
+     $fn=30;
+     color("blue")
+     translate([0,0,0])
+        scale([1.6,1.6,0.6])
+        cube([6,6,1], center=true);
+}
+
+module square_cutout(button) {
+    translate([0,0,0.5])
+    cube([8,8,2], center=true);
+}
+
+
+module rec_button(button) {
+    cube([4,6,1], center=true);
+}
+
+module rec_button_flex() {
+     $fn=30;
+     color("blue")
+     translate([0,0,0])
+        scale([1.6,1.6,0.6])
+        cube([4,8,1], center=true);
+}
+
+module rec_button_cutout(button) {
+    translate([0,0,0.5])
+    cube([6,9,2], center=true);
+}
+
 module button_cutout() {
      $fn=30;
     
@@ -303,27 +346,27 @@ module buttons_cutout() {
 }
 
 module option_buttons_flex() {
-    translate([5,5,0]) button_flex();
-    translate([5,25,0]) button_flex();
-    translate([5,35,0]) button_flex();
-    translate([5,55,0]) button_flex();
+    translate([5,5,0]) square_button_flex();
+    translate([5,25,0]) rec_button_flex();
+    translate([5,35,0]) rec_button_flex();
+    translate([5,55,0]) square_button_flex();
 }
 module option_buttons_cutout() {
     difference() {
         cube([10,60,1]);
-        translate([5,5,0]) button_cutout();
-        translate([5,25,0]) button_cutout();
-        translate([5,35,0]) button_cutout();
-        translate([5,55,0]) button_cutout();
+        translate([5,5,0]) square_cutout();
+        translate([5,24,0]) rec_button_cutout();
+        translate([5,36,0]) rec_button_cutout();
+        translate([5,55,0]) square_cutout();
         option_buttons_flex();
     }
 }
 
 module option_buttons() {
-     translate([5,5,0]) button();
-        translate([5,25,0]) button();
-        translate([5,35,0]) button();
-        translate([5,55,0]) button();
+     translate([5,5,0.5]) square_button();
+        translate([5,24,0.5]) rec_button();
+        translate([5,36,0.5]) rec_button();
+        translate([5,55,0.5]) square_button();
 }
 
 // buttons();
@@ -332,7 +375,68 @@ module option_buttons() {
 // dpad();
 // dpad_cutout();
 
+module pitft_washers() {
+    
+        translate([7.5,8.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([7.5,8.5,10])
+            rotate([0,180,0])
+            screw();
+        
+        
+         translate([56.5,8.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([56.5,8.5,10])
+            rotate([0,180,0])
+            screw();
+        
+        
+        translate([7.5,66.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([7.5,66.5,10])
+            rotate([0,180,0])
+            screw();
+        
+       
+         translate([56.5,66.5,10.7])
+            rotate([0,180,0])
+            washer(3,6);
+        translate([56.5,66.5,10])
+            rotate([0,180,0])
+            screw();
+}
+
+module pi_washers() {
+    
+        translate([7.5,8.5,3])
+            washer(3,6);
+        translate([7.5,8.5,3.7])
+            screw();
+        
+        
+         translate([56.5,8.5,3])
+            washer(3,6);
+        translate([56.5,8.5,3.7])
+            screw();
+        
+        
+        translate([7.5,66.5,3])
+            washer(3,6);
+        translate([7.5,66.5,3.7])
+            screw();
+        
+       
+         translate([56.5,66.5,3])
+            washer(3,6);
+        translate([56.5,66.5,3.7])
+            screw();
+}
+
 module front_case() {
+    $fn=30;
     union() {
         translate([80,22.5,18]) {
             difference() {
@@ -377,49 +481,174 @@ module front_case() {
             translate([12,10,-1])
             cube([40,51,5]);
         }
-        
-         translate([7.5,8.5,16])
+        // PITFT screw mounts
+        translate([7.5,8.5,16])
             rotate([0,180,0])
             screw_mount();
-        translate([7.5,8.5,10.7])
-            rotate([0,180,0])
-            washer(3,6);
-        translate([7.5,8.5,10])
-            rotate([0,180,0])
-            screw();
-        
         translate([56.5,8.5,16])
             rotate([0,180,0])
             screw_mount();
-         translate([56.5,8.5,10.7])
-            rotate([0,180,0])
-            washer(3,6);
-        translate([56.5,8.5,10])
-            rotate([0,180,0])
-            screw();
-        
          translate([7.5,66.5,16])
             rotate([0,180,0])
             screw_mount();
-        translate([7.5,66.5,10.7])
-            rotate([0,180,0])
-            washer(3,6);
-        translate([7.5,66.5,10])
-            rotate([0,180,0])
-            screw();
-        
-        translate([56.5,66.5,16])
+         translate([56.5,66.5,16])
             rotate([0,180,0])
             screw_mount();
-         translate([56.5,66.5,10.7])
-            rotate([0,180,0])
-            washer(3,6);
-        translate([56.5,66.5,10])
+        
+        width = 2.7;
+        thread_height = 7.46;
+        
+        // right side with cutout
+        difference() {
+            translate([2,72,10])
+            cube([130,8,9]);
+          
+            translate([13,71,9])
+            cube([105,6,6]);
+            
+            translate([128,76,6])
             rotate([0,180,0])
             screw();
+            
+            // Has to match top case
+            translate([8,76,6])
+            rotate([0,180,0])
+            screw();
+        }
         
-       
+        // left side
+        difference() {
+            translate([2,-3,10])
+            cube([130,6,9]);
+            
+            translate([128,0,6])
+            rotate([0,180,0])
+            screw();
+            
+            translate([13,0,6])
+            rotate([0,180,0])
+            screw();
+        }
+        translate([0,-3,10])
+        cube([2,83,9]);
+        
+
+        translate([132,-3,10])
+        cube([3,83,9]);
+        translate([109,3,16])
+        cube([23,69,3]);
+     
+        // controller board screw mounts
+        translate([68,9,16])
+            rotate([0,180,0])
+            screw_mount();
+        translate([68,66,16])
+            rotate([0,180,0])
+            screw_mount();
+        
+        translate([100,23,16])
+            rotate([0,180,0])
+            screw_mount();
+        
+        translate([100,52,16])
+            rotate([0,180,0])
+            screw_mount();
     }
+}
+
+module back_case() {
+        difference() {
+            translate([2,72,-6])
+            cube([130,8,16]);
+          
+            // cable cutout
+            translate([13,71,4])
+            cube([85,6,7]);
+            
+            // powerboost usb charging
+            translate([105,74,0])
+            cube([15,10,11]);
+            translate([108.5,71,2])
+            cube([8.5,7,4]);
+            
+            // needs to match the front of case
+            // TODO make module
+            translate([128,76,6])
+                rotate([0,180,0])
+                screw_with_hole();
+            translate([8,76,6])
+                rotate([0,180,0])
+                screw_with_hole();
+        }
+        
+        translate([2,3,-6])
+        cube([130,69,2]);
+        // TODO cutout for sd card space
+        translate([7.5,8.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([56.5,8.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+         translate([7.5,66.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([56.5,66.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        $fn=30;
+        difference() {
+            translate([0,-3,-6])
+            cube([2,83,16]);
+        
+            // audio hole
+            translate([0,16.5,4.5])
+            rotate([0,90,0])
+            cylinder(h=15, d=7, center=true);
+            // hdmi
+            translate([0,38,5.5])
+            rotate([0,90,0])
+            cube([11,18,10], center=true);
+            
+            // no micro usb hole!
+            // powerboost 1000c for power
+    }
+    
+     difference() {
+            translate([2,-3,-6])
+            cube([130,6,16]);
+            
+            translate([128,0,6])
+            rotate([0,180,0])
+            screw_with_hole();
+            
+            translate([13,0,6])
+            rotate([0,180,0])
+            screw_with_hole();
+         
+            // usb hole
+            translate([27,-4,1])
+            cube([17,9,10]);
+            translate([35.5,-6,6])
+            cube([27,15,12], center=true);
+        }
+        
+        // powerboost mount
+        translate([120.5,68.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([104.5,68.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([120.5,39.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([104.5,39.5,-2])
+            rotate([0,180,0])
+            screw_mount();
+        
+        translate([132,-3,-6])
+            cube([3,83,16]);
 }
 
 module screw() {
@@ -434,16 +663,24 @@ module screw() {
     color("grey")
     translate([0,0,-4])
     cylinder(h=thread_height, d=width, center=true);
-   
 }
 
+
+module screw_with_hole() {
+    screw();
+    $fn=30;
+    
+    translate([0,0,7.9])
+    // slightly oversized screw head
+    cylinder(h=15, d=5.5, center=true);
+}
 
 module screw_mount() {
     $fn=30;
     thread_height = 7.46;
     width = 2.6; // undersized
     difference() {
-        cube([6,6,4], center=true);
+        cube([6,8,4], center=true);
         translate([0,0,1])
         cylinder(h=thread_height, d=width, center=true);
     }
@@ -491,8 +728,69 @@ module washer(h=3,d=5) {
     }
 }
 
-hardware_front();
-front_case();
+module beveled_front_case() {
+    difference() {
+        front_case();
+        translate([-10,65,0])
+        rotate(45)
+        cube(30);
+        translate([-10,-31,0])
+        rotate(45)
+        cube(30);
+        
+        translate([142,65,0])
+        rotate(40)
+        cube(30);
+        translate([145,-31,0])
+        rotate(50)
+        cube(30);
+        
+        translate([-10,-19,0])
+        rotate([45,0,0])
+        cube([200,30,30]);
+        
+        translate([-10,96,0])
+        rotate([45,0,0])
+        cube([200,30,30]);
+    }
+}
+
+module beveled_back_case() {
+    difference() {
+        back_case();
+        translate([-10,65,-8])
+        rotate(45)
+        cube(30);
+        translate([-10,-31,-8])
+        rotate(45)
+        cube(30);
+        
+        translate([142,65,-8])
+        rotate(40)
+        cube(30);
+        translate([145,-31,-8])
+        rotate(50)
+        cube(30);
+        
+        translate([-10,-19,-28])
+        rotate([45,0,0])
+        cube([200,30,30]);
+        
+        translate([-10,96,-28])
+        rotate([45,0,0])
+        cube([200,30,30]);
+    }
+}
+
+
+
+// hardware_front();
+hardware_back();
+// pitft_washers();
+pi_washers();
+
+// beveled_front_case();
+beveled_back_case();
 
 // sizes in mm
 
