@@ -1,12 +1,5 @@
 
 // TODO
-// increase washer size by 1mm
-// fix buttons
-// add L/R buttons
-// sd card cutout
-// add 'flat' part to top of audio jack for bridging
-
-
 // V2
 // psp joystick
 // L2 / R2
@@ -212,7 +205,7 @@ pwr_switch_offset = [98,73,4];
 button_height = 2.5;
 
 module hardware_back() {
-     translate([64,6,2])
+     translate([64,6,3])
          battery(); 
      translate([124,72,3])
          rotate(180)
@@ -258,7 +251,7 @@ module dpad_case() {
     }
 }
 
-module all_buttons() {
+module front_buttons() {
     
     translate([0,0,-1.5])
     translate(dpad_offset) dpad_plus(7.8,button_height);
@@ -295,7 +288,7 @@ module button() {
     circle(button_size);
 }
 
-module square_button(button) {
+module square_button() {
     translate([-3,-3])
     cube([6,6,button_height], center=false);
 }
@@ -431,7 +424,7 @@ module front_case_flex() {
     difference() {
         translate([65,7,16.6])
         cube([40,61,0.8]);
-        all_buttons();
+        front_buttons();
             translate([68,9,16])
             rotate([0,180,0])
             cube([6,8,4], center=true);
@@ -452,6 +445,48 @@ module front_case_flex() {
         translate([2,12,16.6])
         cube([8,56,0.8]);
     }
+}
+
+module back_buttons() {
+    translate([74,-1,4])
+    rotate([90,0,0])
+    difference() {
+        square_button();
+        translate([-4,-3,1.3])
+        rotate([45,0,0])
+        cube([8,2,2]);
+    }
+    
+    translate([74,80.5,4])
+    rotate([90,0,0])
+    difference() {
+        square_button();
+        translate([-4,-3,-1.4])
+        rotate([45,0,0])
+        cube([8,2,2]);
+    }
+}
+
+module back_case_flex() {
+    // R button
+    color("blue")
+    
+    difference() {
+        translate([78,78,0])
+        rotate([90,0,180])
+        cube([8,8,1]);
+        back_buttons();
+        }
+    
+    // L button
+    color("blue")
+   
+    difference() {
+        translate([78,-2,0])
+        rotate([90,0,180])
+        cube([8,8,1]);
+            back_buttons();
+        }
 }
 
 module front_case() {
@@ -585,6 +620,7 @@ module controller_screw_mounts() {
 }
 
 module back_case() {
+        // right side
         difference() {
             translate([2,72,-6])
             cube([130,8,16]);
@@ -593,9 +629,22 @@ module back_case() {
             translate([13,71,4])
             cube([85,6,7]);
             
+            // sd card space
+            translate([25,71,-3])
+            cube([14,3,8]);
+            
+            // power switch
             translate(pwr_switch_offset)
             rotate([0,90,90])
             slide_switch_cutout();
+            
+            // R button
+            translate([78,75,0])
+            rotate([90,0,180])
+            union() {
+                cube([8,15,3.2]);
+                cube([8,8,6]);
+            }
             
             // powerboost usb charging
             translate([105,74,0])
@@ -637,6 +686,10 @@ module back_case() {
             translate([0,16.5,4.5])
             rotate([0,90,0])
             cylinder(h=15, d=7, center=true);
+            // audio square cutout for bridging
+            translate([0,16.5,5.5])
+            cube([5,6,5], center=true);
+            
             // hdmi
             translate([0,38,5.5])
             rotate([0,90,0])
@@ -646,10 +699,19 @@ module back_case() {
             // powerboost 1000c for power
     }
     
+     // left side
      difference() {
             translate([2,-3,-6])
             cube([130,6,16]);
             
+            // L button
+            translate([70,2,0])
+            rotate([90,0,0])
+            union() {
+                cube([8,15,3.2]);
+                cube([8,8,6]);
+            }
+         
             translate([128,0,6])
             rotate([0,180,0])
             screw_with_hole();
@@ -848,11 +910,13 @@ module slide_switch_cutout() {
 // washer(4,6);
 
 
-//hardware_front();
-// hardware_back();
+// hardware_front();
+//hardware_back();
 //pitft_washers();
 //pi_washers();
 // front_case_flex();
-// all_buttons();
-beveled_front_case();
-// beveled_back_case();
+back_buttons();
+back_case_flex();
+// front_buttons();
+// beveled_front_case();
+beveled_back_case();
