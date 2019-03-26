@@ -207,8 +207,8 @@ module top_half() {
 }
 
 module hardware_back() {
-     //translate([64,6,2])
-     //    battery(); 
+     translate([64,6,2])
+         battery(); 
      translate([124,72,3])
          rotate(180)
          powerboost();
@@ -457,7 +457,7 @@ dpad_offset = [80,22.5,18];
 buttons_offset= [80,52.5,18];
 option_buttons_offset = [95,7.5,18];
 
-front_case_flex();
+// front_case_flex();
 
 module front_case_flex() {
      translate(dpad_offset)  dpad_flex();
@@ -831,12 +831,12 @@ module tiny_switch() {
 // washer(3,6);
 
 
-//hardware_front();
-//hardware_back();
+// hardware_front();
+hardware_back();
 //pitft_washers();
 //pi_washers();
 
-beveled_front_case();
+//beveled_front_case();
 // beveled_back_case();
 
 // sizes in mm
