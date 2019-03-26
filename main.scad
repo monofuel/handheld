@@ -1,7 +1,6 @@
 
 // TODO
-// add pitft buttons to case
-// check how to print buttons
+// fix buttons
 // add L/R buttons
 // sd card cutout
 
@@ -206,6 +205,8 @@ module top_half() {
     pitft();
 }
 
+pwr_switch_offset = [98,73,4];
+
 module hardware_back() {
      translate([64,6,2])
          battery(); 
@@ -215,6 +216,10 @@ module hardware_back() {
     translate([60,70,0])
     rotate(180)
         board_raspberrypi_model_a_plus_rev1_1(); 
+    
+    translate(pwr_switch_offset)
+        rotate([0,90,90])
+        slide_switch();
        
 }
 
@@ -602,6 +607,10 @@ module back_case() {
             translate([13,71,4])
             cube([85,6,7]);
             
+            translate(pwr_switch_offset)
+            rotate([0,90,90])
+            slide_switch_cutout();
+            
             // powerboost usb charging
             translate([105,74,0])
             cube([15,10,11]);
@@ -827,17 +836,34 @@ module tiny_switch() {
         cube([3,1.5,1], center=true);
 }
 
+module slide_switch() {
+    color("grey")
+      cube([4.2,11.7,6]);
+    color("black")
+      translate([1,3.6,6])
+      cube([2,2,2]);
+}
+
+module slide_switch_cutout() {
+    union() {
+    translate([0,0,-2])
+     cube([4.2,11.7,8]);
+    translate([0.8,2.5,6])
+      cube([2.5,6,4]);
+    }
+}
+
  // tiny_switch();
 // washer(3,6);
 
 
 // hardware_front();
-hardware_back();
+// hardware_back();
 //pitft_washers();
 //pi_washers();
 
 //beveled_front_case();
-// beveled_back_case();
+beveled_back_case();
 
 // sizes in mm
 
