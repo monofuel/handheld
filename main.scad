@@ -3,6 +3,7 @@
 // fix buttons
 // add L/R buttons
 // sd card cutout
+// add 'flat' part to top of audio jack for bridging
 
 
 // V2
@@ -232,10 +233,10 @@ module hardware_front() {
     
 }
 
-module dpad_plus(g) {
+module dpad_plus(g, extrude=1) {
     $fn=30;
-    corners = 9;
-    linear_extrude(1)
+    corners = 10;
+    linear_extrude(extrude)
     difference() {
         square(24, center=true);
         translate([g,g]) square(corners, center=true);
@@ -245,39 +246,36 @@ module dpad_plus(g) {
     }
 }
 
-dpad_depth = -0.3;
-
 module dpad_flex() {
     color("blue")
-    // linear_extrude(1)
-     translate([0,0,dpad_depth])
+    difference() {
+        translate([0,0,-1])
         scale([1.2,1.2,0.6])
         dpad_plus(10);
+        translate([0,0,-1.1])
+        dpad_plus(7.8,2);
+    }
+}
+
+module dpad_case() {
+    difference() {
+        translate([0,0,0]) cube([30,30,2], center=true);
+        translate([0,0,-1])
+        scale([1.1,1.1,3])
+        dpad_plus(10);
+        dpad_flex();
+    }
 }
 
 module dpad() {
-   
-    
-    // do this part in solid plastic
-    difference() {
-    dpad_plus(7.5);
-          translate([0,0,dpad_depth])
-        scale([1.2,1.2,0.6])
-        dpad_plus(10);
-    }
+    translate([0,0,-1])
+    translate(dpad_offset) scale([1,1,1]) dpad_plus(7.8,2);
 }
 
-module dpad_cutout() {
-    difference() {
-        translate([0,0,0])
-        cube([30,30,2], center=true);
-        translate([0,0,-1])
-        scale([1.1,1.1,3])
-        dpad_plus(8);
-       translate([0,0,dpad_depth])
-       scale([1.2,1.2,0.6])
-       dpad_plus(10);
-    }
+
+module all_buttons() {
+    translate([0,0,-1])
+    translate(dpad_offset) dpad_plus(7.8,2);
 }
 
 button_spread=10;
@@ -392,12 +390,6 @@ module option_buttons() {
         translate([5,55,0.5]) square_button();
 }
 
-// buttons();
-// buttons_cutout();
-
-// dpad();
-// dpad_cutout();
-
 module pitft_washers() {
     
         translate([7.5,8.5,10.7])
@@ -462,8 +454,6 @@ dpad_offset = [80,22.5,18];
 buttons_offset= [80,52.5,18];
 option_buttons_offset = [95,7.5,18];
 
-// front_case_flex();
-
 module front_case_flex() {
      translate(dpad_offset)  dpad_flex();
         translate(buttons_offset)  buttons_flex();
@@ -473,7 +463,7 @@ module front_case_flex() {
 module front_case() {
     $fn=30;
     union() {
-        translate(dpad_offset)  dpad_cutout();
+        translate(dpad_offset)  dpad_case();
         translate(buttons_offset)  buttons_cutout();
         translate(option_buttons_offset) option_buttons_cutout();
         
@@ -491,10 +481,9 @@ module front_case() {
             cube([63,69,2]);
             
             // LCD cutout
-            translate([12,10,-2])
-            cube([40,51,5]);
+            translate([12,10,-2]) cube([40,51,5]);
             
-            // buttons
+            // pitft buttons
             translate([4,10,-2]) {
                 translate([-1,-2,0.9])
                 rec_button_flex(center=false);
@@ -861,9 +850,10 @@ module slide_switch_cutout() {
 // hardware_back();
 //pitft_washers();
 //pi_washers();
-
-//beveled_front_case();
-beveled_back_case();
+front_case_flex();
+all_buttons();
+// beveled_front_case();
+// beveled_back_case();
 
 // sizes in mm
 
