@@ -921,16 +921,16 @@ module slide_switch_cutout() {
 // washer(4,6);
 
 
-// hardware_front();
-// hardware_back();
-// pitft_washers();
-// pi_washers();
-// front_case_flex();
+hardware_front();
+hardware_back();
+pitft_washers();
+pi_washers();
+front_case_flex();
 back_buttons();
-// back_case_flex();
-// front_buttons();
-// beveled_front_case();
-// beveled_back_case();
+back_case_flex();
+front_buttons();
+beveled_front_case();
+beveled_back_case();
 
 //rotate([270,0,0]) l_button();
 // rotate([270,0,0]) r_button_flex();
