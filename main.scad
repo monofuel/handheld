@@ -1,5 +1,6 @@
 
 // TODO
+// increase washer size by 1mm
 // fix buttons
 // add L/R buttons
 // sd card cutout
@@ -208,6 +209,8 @@ module top_half() {
 
 pwr_switch_offset = [98,73,4];
 
+button_height = 2.5;
+
 module hardware_back() {
      translate([64,6,2])
          battery(); 
@@ -246,85 +249,49 @@ module dpad_plus(g, extrude=1) {
     }
 }
 
-module dpad_flex() {
-    color("blue")
-    difference() {
-        translate([0,0,-1])
-        scale([1.2,1.2,0.6])
-        dpad_plus(10);
-        translate([0,0,-1.1])
-        dpad_plus(7.8,2);
-    }
-}
-
 module dpad_case() {
     difference() {
         translate([0,0,0]) cube([30,30,2], center=true);
         translate([0,0,-1])
         scale([1.1,1.1,3])
         dpad_plus(10);
-        dpad_flex();
     }
 }
 
-module dpad() {
-    translate([0,0,-1])
-    translate(dpad_offset) scale([1,1,1]) dpad_plus(7.8,2);
-}
-
-
 module all_buttons() {
-    translate([0,0,-1])
-    translate(dpad_offset) dpad_plus(7.8,2);
+    translate([0,0,-1.5])
+    translate(dpad_offset) dpad_plus(7.8,button_height);
+    translate([0,0,-2])
+    translate(option_buttons_offset) option_buttons();
+    translate([0,0,0])
+    translate(buttons_offset) buttons();
 }
 
 button_spread=10;
 button_size = 3;
 
-module button_flex() {
-     $fn=30;
-     color("blue")
-     translate([0,0,0])
-        scale([1.7,1.7,0.6])
-        linear_extrude(1)
-        circle(button_size);
-}
-
 module button() {
      $fn=30;
-    
-    linear_extrude(1)
+    translate([0,0,-1.5])
+    linear_extrude(button_height)
     circle(button_size);
 }
 
 module square_button(button) {
-    cube([6,6,1], center=true);
+    translate([-3,-3])
+    cube([6,6,button_height], center=false);
 }
 
-module square_button_flex() {
-     $fn=30;
-     color("blue")
-     translate([0,0,0])
-        scale([1.6,1.6,0.6])
-        cube([6,6,1], center=true);
-}
 
 module square_cutout(button) {
     translate([0,0,0.5])
-    cube([8,8,2], center=true);
+    cube([8,8,4], center=true);
 }
 
 
 module rec_button(button) {
-    cube([4,6,1], center=true);
-}
-
-module rec_button_flex(center=true) {
-     $fn=30;
-     color("blue")
-     translate([0,0,0])
-        scale([2,1.6,0.6])
-        cube([4,8,1], center);
+    translate([-2,-3])
+    cube([4,6,button_height], center=false);
 }
 
 module rec_button_cutout(center=true) {
@@ -339,13 +306,6 @@ module button_cutout() {
     circle(button_size * 1.4);
 }
 
-module buttons_flex() {
-    translate([0,button_spread,0]) button_flex();
-    translate([button_spread,0,0]) button_flex();
-    translate([0,-button_spread,0]) button_flex();
-    translate([-button_spread,0,0]) button_flex();
-}
-
 module buttons() {
     translate([0,button_spread,0]) button();
     translate([button_spread,0,0]) button();
@@ -353,41 +313,34 @@ module buttons() {
     translate([-button_spread,0,0]) button();
 }
 
-module buttons_cutout() {
+module buttons_case() {
     difference() {
-        translate([0,0,0.5])
-            cube([30,30,1], center=true);
+        translate([-15,-15,-1])
+            cube([30,30,2]);
             
-        translate([0,button_spread,0]) button_cutout();
-        translate([button_spread,0,0]) button_cutout();
-        translate([0,-button_spread,0]) button_cutout();
-        translate([-button_spread,0,0]) button_cutout();
-        buttons_flex();
+        translate([0,button_spread,-1]) button_cutout();
+        translate([button_spread,0,-1]) button_cutout();
+        translate([0,-button_spread,-1]) button_cutout();
+        translate([-button_spread,0,-1]) button_cutout();
     }
 }
 
-module option_buttons_flex() {
-    translate([5,5,0]) square_button_flex();
-    translate([5,25,0]) rec_button_flex();
-    translate([5,35,0]) rec_button_flex();
-    translate([5,55,0]) square_button_flex();
-}
-module option_buttons_cutout() {
+module option_buttons_case() {
     difference() {
-        cube([10,60,1]);
-        translate([5,5,0]) square_cutout();
-        translate([5,24,0]) rec_button_cutout();
-        translate([5,36,0]) rec_button_cutout();
-        translate([5,55,0]) square_cutout();
-        option_buttons_flex();
+        translate([0,0,-1])
+        cube([10,60,2]);
+        translate([4,5,0]) square_cutout();
+        translate([4,24,0]) rec_button_cutout();
+        translate([4,36,0]) rec_button_cutout();
+        translate([4,55,0]) square_cutout();
     }
 }
 
 module option_buttons() {
-     translate([5,5,0.5]) square_button();
-        translate([5,24,0.5]) rec_button();
-        translate([5,36,0.5]) rec_button();
-        translate([5,55,0.5]) square_button();
+     translate([4,5,0.5]) square_button();
+        translate([4,24,0.5]) rec_button();
+        translate([4,36,0.5]) rec_button();
+        translate([4,55,0.5]) square_button();
 }
 
 module pitft_washers() {
@@ -451,21 +404,39 @@ module pi_washers() {
 }
 
 dpad_offset = [80,22.5,18];
-buttons_offset= [80,52.5,18];
+buttons_offset = [80,52.5,18];
 option_buttons_offset = [95,7.5,18];
 
 module front_case_flex() {
-     translate(dpad_offset)  dpad_flex();
-        translate(buttons_offset)  buttons_flex();
-        translate(option_buttons_offset) option_buttons_flex();
+    color("blue")
+    
+    difference() {
+        translate([65,7,16.6])
+        cube([40,61,0.8]);
+        all_buttons();
+            translate([68,9,16])
+            rotate([0,180,0])
+            cube([6,8,4], center=true);
+        translate([68,66,16])
+            rotate([0,180,0])
+            cube([6,8,4], center=true);
+        
+        translate([100,22,16])
+            rotate([0,180,0])
+           cube([6,8,4], center=true);
+        
+        translate([100,53,16])
+            rotate([0,180,0])
+           cube([6,8,4], center=true);
+    }
 }
 
 module front_case() {
     $fn=30;
     union() {
         translate(dpad_offset)  dpad_case();
-        translate(buttons_offset)  buttons_cutout();
-        translate(option_buttons_offset) option_buttons_cutout();
+        translate(buttons_offset)  buttons_case();
+        translate(option_buttons_offset) option_buttons_case();
         
         translate([65,3,16])
         cube([40,4.5,3]);
@@ -486,28 +457,23 @@ module front_case() {
             // pitft buttons
             translate([4,10,-2]) {
                 translate([-1,-2,0.9])
-                rec_button_flex(center=false);
                 rec_button_cutout(center=false);
             }
             
            translate([4,20,-2]) {
                 translate([-1,-2,0.9])
-                rec_button_flex(center=false);
                 rec_button_cutout(center=false);
             }
             translate([4,30,-2]) {
                 translate([-1,-2,0.9])
-                rec_button_flex(center=false);
                 rec_button_cutout(center=false);
             }
             translate([4,40,-2]) {
                 translate([-1,-2,0.9])
-                rec_button_flex(center=false);
                 rec_button_cutout(center=false);
             }
             translate([4,50,-2]) {
                 translate([-1,-2,0.9])
-                rec_button_flex(center=false);
                 rec_button_cutout(center=false);
             }
             
@@ -568,23 +534,26 @@ module front_case() {
         cube([3,83,9]);
         translate([109,3,16])
         cube([23,69,3]);
-     
-        // controller board screw mounts
-        translate([68,9,16])
-            rotate([0,180,0])
-            screw_mount();
-        translate([68,66,16])
-            rotate([0,180,0])
-            screw_mount();
-        
-        translate([100,22,16])
-            rotate([0,180,0])
-            screw_mount();
-        
-        translate([100,53,16])
-            rotate([0,180,0])
-            screw_mount();
+    
+        controller_screw_mounts();
     }
+}
+
+module controller_screw_mounts() {
+    translate([68,9,16])
+        rotate([0,180,0])
+        screw_mount();
+    translate([68,66,16])
+        rotate([0,180,0])
+        screw_mount();
+    
+    translate([100,22,16])
+        rotate([0,180,0])
+        screw_mount();
+    
+    translate([100,53,16])
+        rotate([0,180,0])
+        screw_mount();
 }
 
 module back_case() {
@@ -787,6 +756,9 @@ module beveled_front_case() {
         translate([-10,96,0])
         rotate([45,0,0])
         cube([200,30,30]);
+        
+        
+        front_case_flex();
     }
 }
 
@@ -843,15 +815,15 @@ module slide_switch_cutout() {
 }
 
  // tiny_switch();
-// washer(3,6);
+washer(4,6);
 
 
 // hardware_front();
 // hardware_back();
 //pitft_washers();
 //pi_washers();
-front_case_flex();
-all_buttons();
+// front_case_flex();
+// all_buttons();
 // beveled_front_case();
 // beveled_back_case();
 
