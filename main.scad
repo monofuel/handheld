@@ -259,12 +259,30 @@ module dpad_case() {
 }
 
 module all_buttons() {
+    
     translate([0,0,-1.5])
     translate(dpad_offset) dpad_plus(7.8,button_height);
     translate([0,0,-2])
     translate(option_buttons_offset) option_buttons();
     translate([0,0,0])
     translate(buttons_offset) buttons();
+    
+    // pitft buttons
+    translate([6,16.5,16.5]) 
+        rec_button();
+    
+    translate([6,26.5,16.5]) 
+        rec_button();
+    
+    translate([6,36.5,16.5]) 
+        rec_button();
+    
+    translate([6,46.5,16.5]) 
+       rec_button();
+    
+    translate([6,56.5,16.5]) 
+        rec_button();
+    
 }
 
 button_spread=10;
@@ -289,7 +307,7 @@ module square_cutout(button) {
 }
 
 
-module rec_button(button) {
+module rec_button() {
     translate([-2,-3])
     cube([4,6,button_height], center=false);
 }
@@ -429,6 +447,11 @@ module front_case_flex() {
             rotate([0,180,0])
            cube([6,8,4], center=true);
     }
+    color("blue")
+    difference() {
+        translate([2,12,16.6])
+        cube([8,56,0.8]);
+    }
 }
 
 module front_case() {
@@ -455,24 +478,24 @@ module front_case() {
             translate([12,10,-2]) cube([40,51,5]);
             
             // pitft buttons
-            translate([4,10,-2]) {
+            translate([4,11,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
             
-           translate([4,20,-2]) {
+           translate([4,21,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,30,-2]) {
+            translate([4,31,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,40,-2]) {
+            translate([4,41,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,50,-2]) {
+            translate([4,51,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
@@ -481,7 +504,12 @@ module front_case() {
         // PITFT screw mounts
         translate([7.5,8.5,16])
             rotate([0,180,0])
-            screw_mount();
+             difference() {
+                 screw_mount();
+                 // trim some space by the standoff
+                 translate([-1.5,3.5,-2.5])
+                 rec_button_cutout(center=false);
+             }
         translate([56.5,8.5,16])
             rotate([0,180,0])
             screw_mount();
@@ -815,25 +843,16 @@ module slide_switch_cutout() {
 }
 
  // tiny_switch();
-washer(4,6);
+
+// washer(3,6);
+// washer(4,6);
 
 
-// hardware_front();
+//hardware_front();
 // hardware_back();
 //pitft_washers();
 //pi_washers();
 // front_case_flex();
 // all_buttons();
-// beveled_front_case();
+beveled_front_case();
 // beveled_back_case();
-
-// sizes in mm
-
-// gameboy color
-// cube([ 	133.5 , 78 , 27.4]);
-
-// #cube([ 	133.5 , 88 , 27.4]);
-
-
-// #rotate(90)
-//     cube([134.62, 99.06, 40]);
