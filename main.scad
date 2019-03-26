@@ -446,8 +446,7 @@ module front_case_flex() {
         cube([8,56,0.8]);
     }
 }
-
-module back_buttons() {
+module l_button() {
     translate([74,-1,4])
     rotate([90,0,0])
     difference() {
@@ -456,7 +455,9 @@ module back_buttons() {
         rotate([45,0,0])
         cube([8,2,2]);
     }
-    
+}
+
+module r_button() {
     translate([74,80.5,4])
     rotate([90,0,0])
     difference() {
@@ -467,22 +468,32 @@ module back_buttons() {
     }
 }
 
-module back_case_flex() {
-    // R button
+module back_buttons() {
+    l_button();
+    r_button();
+    
+}
+
+module r_button_flex() {
     color("blue")
     
     difference() {
-        translate([78,78,0])
+        translate([78,78.01,0])
         rotate([90,0,180])
-        cube([8,8,1]);
+        cube([8,8,0.9]);
         back_buttons();
         }
+}
+
+module back_case_flex() {
+    // R button
+    r_button_flex();
     
     // L button
     color("blue")
    
     difference() {
-        translate([78,-2,0])
+        translate([78,-2.01,0])
         rotate([90,0,180])
         cube([8,8,1]);
             back_buttons();
@@ -911,12 +922,15 @@ module slide_switch_cutout() {
 
 
 // hardware_front();
-//hardware_back();
-//pitft_washers();
-//pi_washers();
+// hardware_back();
+// pitft_washers();
+// pi_washers();
 // front_case_flex();
 back_buttons();
-back_case_flex();
+// back_case_flex();
 // front_buttons();
 // beveled_front_case();
-beveled_back_case();
+// beveled_back_case();
+
+//rotate([270,0,0]) l_button();
+// rotate([270,0,0]) r_button_flex();
