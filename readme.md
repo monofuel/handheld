@@ -11,7 +11,7 @@ Portable retropie system inspired by the pocket pigrrl
 - add photos of printed prototype to github!
 - come up with a good name
 - make a BoM
-- address fixes for model
+- address fixes for model listed in `main.scad`
 - automate building stl's for individual parts of model
 - polish and share software setup scripts
 - put on thingiverse
@@ -48,6 +48,8 @@ Front half is one print and back half is the second print
   - MM_LR_flex.stl in flexible plastic
 
 ### Single Material Instructions
+
+Make sure your printer is calibrated well! https://www.thingiverse.com/thing:533472/files I recommend the negative space tolerance test.
 
 - PETG/PLA preferable:
   - front_case.stl
