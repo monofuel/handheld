@@ -30,6 +30,7 @@
 Front half is one print and back half is the second print
 
 - Front Half
+  - flip upside down! (doh)
   - front_case.stl preferably in PETG or PLA (ABS is likely to warp)
   - front_buttons.stl in any non-flexible plastic (preferably colorful!)
   - front_flex.stl in flexible plastic
@@ -42,6 +43,7 @@ Front half is one print and back half is the second print
 
 - PETG/PLA preferable:
   - front_case.stl
+    - flip upside down!
   - back_case.stl
 - any non-flexible plastic:
   - LR_button.stl 2x
