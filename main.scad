@@ -1,5 +1,27 @@
 
+// What's good
+// power switch is usable
+// power jack works
+// pi outputs are good
+// sd card has enough space
+// both halves come together great
+
 // TODO
+// V1 fixes
+
+// back 2 screw holes for powerboost need to be closer together (not in corners)
+// front 2 powerboot screws are too far apart (slightly off)
+// fix thin bridge over power switch
+// power switch hole needs to be a little bigger
+// more support behind R button
+// L and R buttons probably need more room
+// model shows 3mm washers for each screw, but actaully use 4mm
+// hdmi cutout can be smaller
+// usb cutout can be smaller
+// screw holes could be bigger
+// some screw holes too close to edge of case
+// case screws should probably only thread into the top half of the case
+
 // V2
 // psp joystick
 // L2 / R2
