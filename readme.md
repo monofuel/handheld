@@ -2,11 +2,13 @@
 
 ## TODO
 
+- add photos of printed prototype to github!
 - come up with a good name
 - make a BoM
 - address fixes for model
 - automate building stl's for individual parts of model
 - polish and share software setup scripts
+- put on thingiverse
 
 ## Design Goals
 - must fit in pocket
