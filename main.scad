@@ -58,7 +58,9 @@ beveled_back_case();
 // alternative batteries?
 
 
+// ------------------------
 // some stuff borrowed from https://github.com/RigacciOrg/openscad-rpi-library
+// TODO this code is covered under GPL, need to reconsider licensing
 
 //------------------------------------------------------------------------
 // Matrix of 2.54 mm pins.
@@ -148,6 +150,8 @@ module raspberrypi_model_a_plus_rev1_1_holes() {
     translate([3.5, 3.5 + 58])       circle(r=(2.75 / 2), $fn=16);
     translate([(x - 3.5), 3.5 + 58]) circle(r=(2.75 / 2), $fn=16);
 }
+// ------------------------
+// end of borrowed code
 
 module pitft() {
      x  = 56.5;     y = 65;    z = 1.60;
