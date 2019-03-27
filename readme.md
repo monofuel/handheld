@@ -1,5 +1,11 @@
 # Portable Handheld
 
+Portable retropie system inspired by the pocket pigrrl
+
+## Prototype V0.9
+
+![Portable](portable.jpg)
+
 ## TODO
 
 - add photos of printed prototype to github!
