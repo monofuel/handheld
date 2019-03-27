@@ -61,6 +61,7 @@ beveled_back_case();
 // ------------------------
 // some stuff borrowed from https://github.com/RigacciOrg/openscad-rpi-library
 // TODO this code is covered under GPL, need to reconsider licensing
+// these are not used for the generated STLs, they are only for previewing that everything fits.
 
 //------------------------------------------------------------------------
 // Matrix of 2.54 mm pins.
