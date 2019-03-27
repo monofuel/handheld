@@ -15,6 +15,8 @@ Portable retropie system inspired by the pocket pigrrl
 - automate building stl's for individual parts of model
 - polish and share software setup scripts
 - put on thingiverse
+- rpi board models borrowed from `openscad-rpi-library` are covered under GPL- Will have to either remove them or change my license.
+  - only used for hardware preview in openscad, the used code does not affect the 3D printed case.
 
 ## Design Goals
 - must fit in pocket
