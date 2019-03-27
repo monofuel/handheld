@@ -1,4 +1,26 @@
 
+
+ // tiny_switch();
+
+// washer(3,6);
+// washer(4,6);
+
+
+hardware_front();
+hardware_back();
+pitft_washers();
+pi_washers();
+front_case_flex();
+back_buttons();
+back_case_flex();
+front_buttons();
+beveled_front_case();
+beveled_back_case();
+
+//rotate([270,0,0]) l_button();
+// rotate([270,0,0]) r_button_flex();
+
+
 // What's good
 // power switch is usable
 // power jack works
@@ -278,16 +300,7 @@ module dpad_case() {
     }
 }
 
-module front_buttons() {
-    
-    translate([0,0,-1.5])
-    translate(dpad_offset) dpad_plus(7.8,button_height);
-    translate([0,0,-2])
-    translate(option_buttons_offset) option_buttons();
-    translate([0,0,0])
-    translate(buttons_offset) buttons();
-    
-    // pitft buttons
+module pitft_buttons() {
     translate([6,16.5,16.5]) 
         rec_button();
     
@@ -302,6 +315,18 @@ module front_buttons() {
     
     translate([6,56.5,16.5]) 
         rec_button();
+}
+
+module front_buttons() {
+    
+    translate([0,0,-1.5])
+    translate(dpad_offset) dpad_plus(7.8,button_height);
+    translate([0,0,-2])
+    translate(option_buttons_offset) option_buttons();
+    translate([0,0,0])
+    translate(buttons_offset) buttons();
+    
+    pitft_buttons();
     
 }
 
@@ -470,7 +495,9 @@ module front_case_flex() {
     color("blue")
     difference() {
         translate([2,12,16.6])
-        cube([8,56,0.8]);
+        cube([8,50,0.8]);
+        pitft_buttons();
+        
     }
 }
 module l_button() {
@@ -944,23 +971,3 @@ module slide_switch_cutout() {
       cube([2.5,6,4]);
     }
 }
-
- // tiny_switch();
-
-// washer(3,6);
-// washer(4,6);
-
-
-hardware_front();
-hardware_back();
-pitft_washers();
-pi_washers();
-front_case_flex();
-back_buttons();
-back_case_flex();
-front_buttons();
-beveled_front_case();
-beveled_back_case();
-
-//rotate([270,0,0]) l_button();
-// rotate([270,0,0]) r_button_flex();
