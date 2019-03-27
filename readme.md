@@ -52,9 +52,15 @@ Front half is one print and back half is the second print
 
 ## Parts
 
+parts list comes to about $120 of hardware from Adafruit, including the battery, sd card and pi.
+
 - TODO this list is not complete
 - [Raspberry pi 3 A+](https://www.adafruit.com/product/4027)
 - [Adafruit PITFT 2.4" touchscreen](https://www.adafruit.com/product/2455)
+- [26-pin cable](https://www.adafruit.com/product/862)
+- [powerboost 1000c](https://www.adafruit.com/product/2465)
+  - no substitutes!
+  - [decent power supply](https://www.adafruit.com/product/1995)
 - perfboard
 - [#4-40 3/8 screws](https://www.amazon.com/Machine-Screws-Phillips-Stainless-Quantity/dp/B01LY5VW6Q)
   - possibly substitute with `M3` and modify screws in `main.scad`
@@ -62,3 +68,7 @@ Front half is one print and back half is the second print
 - [slim tactile buttons](https://www.adafruit.com/product/1489) for PITFT
 - [soft tactile buttons](https://www.adafruit.com/product/3101)
   - can substitute with (clicky switches)[https://www.adafruit.com/product/367]
+- wires
+- sd card, one big enough for all your games!
+- [slide switch](https://www.adafruit.com/product/805)
+- [3.7v 200mAh battery](https://www.adafruit.com/product/2011)
