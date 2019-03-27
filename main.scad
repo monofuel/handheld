@@ -27,18 +27,23 @@ beveled_back_case();
 // pi outputs are good
 // sd card has enough space
 // both halves come together great
+// PITFT buttons function!
 
 // TODO
 // V1 fixes
 
+// gap between buttons and case could be smaller
+//   d-pad could be bigger and closer to case
+//   ab/xy buttons could be bigger (don't feel super great)
+// I think the flexible backing to the buttons is too thick, and doesn't work with soft buttons
 // back 2 screw holes for powerboost need to be closer together (not in corners)
 // front 2 powerboot screws are too far apart (slightly off)
 // fix thin bridge over power switch
 // power switch hole needs to be a little bigger
-// more support behind R button
-// L and R buttons probably need more room
-// model shows 3mm washers for each screw, but actaully use 4mm
-// hdmi cutout can be smaller
+// more support behind R button to stop it from moving
+// L and R buttons probably need more room, way too close to outside of case for soft buttons
+// model shows 3mm washers for each screw, but actaully use 4mm. I think the screw mounts need to be 1mm deeper
+// hdmi cutout can be smaller (while still working with hdmi cables)
 // usb cutout can be smaller
 // screw holes could be bigger
 // some screw holes too close to edge of case
