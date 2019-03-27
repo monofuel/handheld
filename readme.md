@@ -1,55 +1,62 @@
-https://e3d-online.com/blog/2019/02/25/tool-changer-stl-design-competition/
+# Portable Handheld
 
+## Printing Instructions
+- prototype STLs are available in the v0.9 folder (v1 is pending some improvements listed in `main.scad`)
+- needs to be printed in 2 halves, a front half and back half.
+  - no supports needed!
 
-- pitft
-  - https://learn.adafruit.com/adafruit-2-4-pitft-hat-with-resistive-touchscreen-mini-kit/downloads
+- print 12 `washer_4mm.stl` if using `4-40 x 3/8"` screws (these were the screws I had on hand, and were recommended for the pigrrl 2
+)
+### Multi Material Instructions
 
-- inspiration 
-    - https://www.thingiverse.com/thing:2911881
-    - https://learn.adafruit.com/super-game-pi/overview
+Front half is one print and back half is the second print
 
+- Front Half
+  - front_case.stl preferably in PETG or PLA (ABS is likely to warp)
+  - front_buttons.stl in any non-flexible plastic (preferably colorful!)
+  - front_flex.stl in flexible plastic
+- Back Half
+  - back_case.stl preferably in PETG or PLA (ABS is likely to warp)
+  - MM_back_buttons.stl in any non-flexible plastic (preferably colorful!)
+  - MM_LR_flex.stl in flexible plastic
 
-- requirements
-  - must fit in pocket
-  - snes games
-  - easy HDMI output
-  - stereo speakers
-  - battery
-  - lots of RGB lighting
+### Single Material Instructions
 
-- input
-  - 3D print buttons?
-    - eeehh
-  - switch joycon controllers
-  - keyboard?
-  - touch?
+- PETG/PLA preferable:
+  - front_case.stl
+  - back_case.stl
+- any non-flexible plastic:
+  - LR_button.stl 2x
+  - front_buttons.stl
+- flexible plastic
+  - LR_flex.stl 2x
+  - front_flex.stl
 
-- board options:
-    - raspberry pi 3
-    - nanopi m4
-    - tinkerboard
+  print all the parts, glue the buttons into the holes on the flexible parts, and then glue the flexible parts to the case.
 
-- print entire gameboy as one part
-  - recessed input buttons?
-  - lots of flexible plastic
-  - transparent part for LEDs
-  - hdmi right angle: https://www.adafruit.com/product/3550
+## TODO
 
-- PiTFT Plus 480x320 3.5"
-    - https://www.adafruit.com/product/2441 
+- come up with a good name
+- make a BoM
+- address fixes for model
+- automate building stl's for individual parts of model
+- polish and share software setup scripts
 
+## Design Goals
+- must fit in pocket
+- must be sturdy
+- expose audio and hdmi on side of case
+- must be modular and easy to replace parts
 
-- adafruit pitft 2.8" 320x240
-    - https://www.adafruit.com/product/1601
-    - SPI
+## Parts
 
-- pimoroni hyperpixel 4.0" 800x480
-    - https://www.adafruit.com/product/3578
-    - DPI
-
-- 5" touch lcd
-    - https://www.amazon.com/dp/B01HPV7D38
-    - hdmi
-
-- 4" touch lcd 
-    - https://www.amazon.com/dp/B078N8SHHQ/
+- TODO this list is not complete
+- [Raspberry pi 3 A+](https://www.adafruit.com/product/4027)
+- [Adafruit PITFT 2.4" touchscreen](https://www.adafruit.com/product/2455)
+- perfboard
+- [#4-40 3/8 screws](https://www.amazon.com/Machine-Screws-Phillips-Stainless-Quantity/dp/B01LY5VW6Q)
+  - possibly substitute with `M3` and modify screws in `main.scad`
+  - depending on length, printed washer_4mm may not be needed
+- [slim tactile buttons](https://www.adafruit.com/product/1489) for PITFT
+- [soft tactile buttons](https://www.adafruit.com/product/3101)
+  - can substitute with (clicky switches)[https://www.adafruit.com/product/367]
