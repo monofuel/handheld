@@ -721,6 +721,9 @@ module back_case() {
             union() {
                 cube([8,15,3.2]);
                 cube([8,8,6]);
+                // room for wires
+                translate([0,8,-3])
+                cube([8,8,6]);
             }
          
             translate([128,0,6])
@@ -921,15 +924,15 @@ module slide_switch_cutout() {
 // washer(4,6);
 
 
-hardware_front();
-hardware_back();
-pitft_washers();
-pi_washers();
-front_case_flex();
-back_buttons();
-back_case_flex();
-front_buttons();
-beveled_front_case();
+//hardware_front();
+//hardware_back();
+//pitft_washers();
+//pi_washers();
+//front_case_flex();
+//back_buttons();
+//back_case_flex();
+//front_buttons();
+// beveled_front_case();
 beveled_back_case();
 
 //rotate([270,0,0]) l_button();
