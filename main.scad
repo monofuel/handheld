@@ -21,10 +21,15 @@
 // screw holes could be bigger
 // some screw holes too close to edge of case
 // case screws should probably only thread into the top half of the case
+// back case could be 2mm instead of 3mm (hefty!)
 
 // V2
 // psp joystick
 // L2 / R2
+// flexible plastic for grips on sides
+// better L/R placement?
+// alternative batteries?
+
 
 // some stuff borrowed from https://github.com/RigacciOrg/openscad-rpi-library
 
@@ -946,15 +951,15 @@ module slide_switch_cutout() {
 // washer(4,6);
 
 
-//hardware_front();
-//hardware_back();
-//pitft_washers();
-//pi_washers();
-//front_case_flex();
-//back_buttons();
-//back_case_flex();
-//front_buttons();
-// beveled_front_case();
+hardware_front();
+hardware_back();
+pitft_washers();
+pi_washers();
+front_case_flex();
+back_buttons();
+back_case_flex();
+front_buttons();
+beveled_front_case();
 beveled_back_case();
 
 //rotate([270,0,0]) l_button();

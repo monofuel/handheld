@@ -1,5 +1,21 @@
 # Portable Handheld
 
+## TODO
+
+- come up with a good name
+- make a BoM
+- address fixes for model
+- automate building stl's for individual parts of model
+- polish and share software setup scripts
+
+## Design Goals
+- must fit in pocket
+- must be sturdy
+- see how well printing buttons with flexible plastic connecting to case
+  - reduces part count when printed on a multi-material printer, and might not be terrible?
+- expose audio and hdmi on side of case
+- must be modular and easy to replace parts
+
 ## Printing Instructions
 - prototype STLs are available in the v0.9 folder (v1 is pending some improvements listed in `main.scad`)
 - needs to be printed in 2 halves, a front half and back half.
@@ -33,20 +49,6 @@ Front half is one print and back half is the second print
   - front_flex.stl
 
   print all the parts, glue the buttons into the holes on the flexible parts, and then glue the flexible parts to the case.
-
-## TODO
-
-- come up with a good name
-- make a BoM
-- address fixes for model
-- automate building stl's for individual parts of model
-- polish and share software setup scripts
-
-## Design Goals
-- must fit in pocket
-- must be sturdy
-- expose audio and hdmi on side of case
-- must be modular and easy to replace parts
 
 ## Parts
 
