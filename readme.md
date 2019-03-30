@@ -2,6 +2,10 @@
 
 Portable retropie system inspired by the pocket pigrrl
 
+## V0.95
+  - in progress
+  - run `make -j4` to build
+
 ## Prototype V0.9
 
 ![Portable](portable.jpg)
@@ -56,14 +60,13 @@ Make sure your printer is calibrated well! https://www.thingiverse.com/thing:533
   - front_case.stl
     - flip upside down!
   - back_case.stl
-- any non-flexible plastic:
-  - LR_button.stl 2x
-  - front_buttons.stl
 - flexible plastic
+  - front buttons: print both together!
+    - front_buttons.stl
+    - front_flex.stl
+- back button: not sure how to handle these, need to rethink L/R positioning.
+  - LR_button.stl 2x
   - LR_flex.stl 2x
-  - front_flex.stl
-
-  print all the parts, glue the buttons into the holes on the flexible parts, and then glue the flexible parts to the case.
 
 ## Parts
 
