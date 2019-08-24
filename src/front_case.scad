@@ -45,7 +45,7 @@ module square_cutout(button) {
 
 module rec_button_cutout(center=true) {
     translate([0,0,0.5])
-    cube([6,9,4], center);
+    cube([5,7,4], center);
 }
 
 module option_buttons_case() {
@@ -94,37 +94,42 @@ module pitft_washers() {
             screw();
 }
 
-module controller_screw_mounts() {
+module controller_screw_mounts(screw_hole) {
+    // top left screw mount
     translate([68,9,16])
         rotate([0,180,0])
-        screw_mount();
+        screw_mount(screw_hole);
+    // top right screw mount
     translate([68,66,16])
         rotate([0,180,0])
-        screw_mount();
-    
+        screw_mount(screw_hole);
+    // lower left screw mount
     translate([100,22,16])
         rotate([0,180,0])
-        screw_mount();
-    
+        screw_mount(screw_hole);
+    // lower right screw mount
     translate([100,53,16])
         rotate([0,180,0])
-        screw_mount();
+        screw_mount(screw_hole);
 }
 
 module front_case() {
     $fn=30;
     union() {
+        // front button area
         translate(dpad_offset)  dpad_case();
         translate(buttons_offset)  buttons_case();
         translate(option_buttons_offset) option_buttons_case();
         
+        // left side gap
         translate([65,3,16])
-        cube([40,4.5,3]);
+            cube([40,4.5,3]);
+        // right side gap
         translate([65,67.5,16])
-        cube([40,4.5,3]);
-        
+            cube([40,4.5,3]);
+        // lower gap
         translate([105,3,16])
-        cube([4,69,3]);
+            cube([4,69,3]);
         
         // piTFT
         translate([0,3,18])
@@ -136,24 +141,24 @@ module front_case() {
             translate([12,10,-2]) cube([40,51,5]);
             
             // pitft buttons
-            translate([4,11,-3]) {
+            translate([4.5,12,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
             
-           translate([4,21,-3]) {
+           translate([4.5,22,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,31,-3]) {
+            translate([4.5,32,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,41,-3]) {
+            translate([4.5,42,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,51,-3]) {
+            translate([4.5,52,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }

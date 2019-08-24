@@ -112,16 +112,25 @@ module screw_with_hole() {
     cylinder(h=15, d=5.5, center=true);
 }
 
-module screw_mount() {
+module screw_mount(screw_hole=true) {
     $fn=30;
     thread_height = 7.46;
     width = 2.6; // undersized
     difference() {
         cube([6,8,4], center=true);
-        translate([0,0,1])
-        cylinder(h=thread_height, d=width, center=true);
+        if (screw_hole) {
+            #translate([0,0,1])
+            cylinder(h=thread_height, d=width, center=true);
+        }
     }
 }
+
+translate([50,16,2])
+    screw_mount(screw_hole=false);
+
+translate([50,4,2])
+    screw_mount(screw_hole=true);
+
 module battery() {
     color("grey")
     cube([37,60,7.24]);
