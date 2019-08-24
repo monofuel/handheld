@@ -30,9 +30,14 @@ module pi_3_a_plus() {
 
     translate([1.0, 7.25, 0]) header(2, 20);
     translate([width,7.25,0]) rotate(90) micro_usb();
-    translate([22,length - (15 - 2.6),-2]) sdcard();
-    translate([21.5,length - (15 - 2.6),-2.5]) sdcard_reader();
-    translate([18,-2.5,0]) usb();
+    // translate([22,length - (15 - 2.6),-2]) sdcard();
+    // translate([21.5,length - (15 - 2.6),-2.5]) sdcard_reader();
+    // translate([18,-2.5,0]) usb();
+
+ 		translate([22,-3.5,-2]) sdcard();
+    translate([21.5,0,-2.5]) sdcard_reader();
+    translate([18,length - 12,0]) usb();
+
     translate([46,25,0]) hdmi();
     translate([43.5,length-7,0]) rotate(270) audio();
 }

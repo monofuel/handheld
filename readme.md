@@ -24,8 +24,6 @@ Portable retropie system inspired by the pocket pigrrl
 ## Design Goals
 - must fit in pocket
 - must be sturdy
-- see how well printing buttons with flexible plastic connecting to case
-  - reduces part count when printed on a multi-material printer, and might not be terrible?
 - expose audio and hdmi on side of case
 - must be modular and easy to replace parts
 
@@ -36,23 +34,8 @@ Portable retropie system inspired by the pocket pigrrl
 
 - print 12 `washer_4mm.stl` (color does not matter, these are internal) if using `4-40 x 3/8"` screws (these were the screws I had on hand, and were recommended for the pigrrl 2
 )
-### Multi Material Instructions
 
-Front half is one print and back half is the second print
-
-- Front Half
-  - load front_case.amf
-  - flip upside down! (doh)
-  - front_case.stl preferably in PETG or PLA (ABS is likely to warp)
-  - front_buttons.stl in any non-flexible plastic (preferably colorful!)
-  - front_flex.stl in flexible plastic
-- Back Half
-  - load back_case.amf
-  - back_case.stl preferably in PETG or PLA (ABS is likely to warp)
-  - MM_back_buttons.stl in any non-flexible plastic (preferably colorful!)
-  - MM_LR_flex.stl in flexible plastic
-
-### Single Material Instructions
+### Printing Instructions
 
 Make sure your printer is calibrated well! https://www.thingiverse.com/thing:533472/files I recommend the negative space tolerance test.
 

@@ -126,6 +126,7 @@ module front_case() {
         translate([105,3,16])
         cube([4,69,3]);
         
+        // piTFT
         translate([0,3,18])
         difference() {
             translate([2,0,-1])
@@ -183,16 +184,16 @@ module front_case() {
         // right side with cutout
         difference() {
             translate([2,72,10])
-            cube([130,8,9]);
+            cube([150,8,9]);
           
             translate([13,71,9])
             cube([105,6,6]);
             
-            translate([128,76,6])
+            // screws have to match back case
+            translate([118,76,6])
             rotate([0,180,0])
             screw();
             
-            // Has to match top case
             translate([8,76,6])
             rotate([0,180,0])
             screw();
@@ -201,7 +202,7 @@ module front_case() {
         // left side
         difference() {
             translate([2,-3,10])
-            cube([130,6,9]);
+            cube([150,6,9]);
             
             translate([128,0,6])
             rotate([0,180,0])
@@ -211,14 +212,17 @@ module front_case() {
             rotate([0,180,0])
             screw();
         }
+        // top
         translate([0,-3,10])
-        cube([2,83,9]);
+            cube([2,83,9]);
         
+        // bottom
+        translate([146,-3,10])
+            cube([3,83,9]);
 
-        translate([132,-3,10])
-        cube([3,83,9]);
+        // front below controller
         translate([109,3,16])
-        cube([23,69,3]);
+            cube([38,69,3]);
     
         controller_screw_mounts();
     }
@@ -234,10 +238,10 @@ module beveled_front_case() {
         rotate(45)
         cube(30);
         
-        translate([142,65,0])
+        translate([142 + 13,65,0])
         rotate(40)
         cube(30);
-        translate([145,-31,0])
+        translate([145 + 13,-31,0])
         rotate(50)
         cube(30);
         

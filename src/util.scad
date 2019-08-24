@@ -1,3 +1,6 @@
+use <powerboost.scad>;
+use <pi.scad>;
+
 module micro_usb() {
     color("grey")
     cube([7.7,5.5,3]);
@@ -165,9 +168,9 @@ module top_half() {
 pwr_switch_offset = [98,73,4];
 
 module hardware_back() {
-     translate([64,6,3])
+     translate([83,6,3])
          battery(); 
-     translate([124,72,3])
+     translate([145,72,3])
          rotate(180)
          powerboost();
     translate([60,70,0])
