@@ -119,8 +119,7 @@ module screw_mount(screw_hole=true) {
     difference() {
         cube([6,8,4], center=true);
         if (screw_hole) {
-            #translate([0,0,1])
-            cylinder(h=thread_height, d=width, center=true);
+            translate([0,0,1]) cylinder(h=thread_height, d=width, center=true);
         }
     }
 }
@@ -155,18 +154,31 @@ module slide_switch() {
       cube([2,2,2]);
 }
 
-module dpad_plus(g, extrude=1) {
+module dpad_plus(g, extrude=2, curve=true) {
     $fn=30;
     corners = 10;
-    linear_extrude(extrude)
+
+    radius = 50;
     difference() {
-        square(24, center=true);
-        translate([g,g]) square(corners, center=true);
-         rotate(90) translate([g,g]) square(corners, center=true);
-        rotate(180) translate([g,g]) square(corners, center=true);
-        rotate(270) translate([g,g]) square(corners, center=true);
+
+        linear_extrude(extrude)
+        difference() {
+            square(24, center=true);
+            translate([g,g]) square(corners, center=true);
+            rotate(90) translate([g,g]) square(corners, center=true);
+            rotate(180) translate([g,g]) square(corners, center=true);
+            rotate(270) translate([g,g]) square(corners, center=true);
+
+        }
+        if(curve){
+            translate([0,0,radius + extrude - 1])
+                sphere(radius, $fn=100);
+        }
     }
 }
+
+translate([70,12,0])
+    dpad_plus(7.8);
 
 
 module top_half() {

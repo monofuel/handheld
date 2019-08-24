@@ -1,7 +1,7 @@
 use <util.scad>;
 button_spread=10;
-button_size = 3.5;
-button_height = 3;
+button_size = 4;
+button_height = 4;
 
 dpad_offset = [80,22.5,18];
 buttons_offset = [80,52.5,18];

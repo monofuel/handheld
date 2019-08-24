@@ -7,7 +7,7 @@ module front_case_flex() {
     
     difference() {
         union() {
-            translate([65,7,16.6])
+            translate([65,7,16])
                 cube([40,61,0.8]);
             front_buttons();
         }

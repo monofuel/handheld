@@ -12,9 +12,9 @@ option_buttons_offset = [95,7.5,18];
 module dpad_case() {
     difference() {
         translate([0,0,0]) cube([30,30,2], center=true);
-        translate([0,0,-1])
-        scale([1.1,1.1,3])
-        dpad_plus(10);
+        translate([0,0,-2])
+        scale([1.1,1.1,5])
+        dpad_plus(8, curve=false);
     }
 }
 
@@ -22,7 +22,7 @@ module button_cutout() {
      $fn=30;
     
     linear_extrude(2)
-    circle(button_size * 1.4);
+    circle(button_size * 1.5);
 }
 
 module buttons_case() {
