@@ -1,5 +1,7 @@
 use <powerboost.scad>;
 use <pi.scad>;
+use <pitft.scad>;
+use <controller.scad>;
 
 module micro_usb() {
     color("grey")
@@ -189,18 +191,19 @@ module top_half() {
 pwr_switch_offset = [98,73,4];
 
 module hardware_back() {
-     translate([83,6,3])
-         battery(); 
      translate([145,72,3])
          rotate(180)
          powerboost();
-    translate([60,70,0])
+    translate([60,70,2])
     rotate(180)
         pi_3_a_plus(); 
     
     translate(pwr_switch_offset)
         rotate([0,90,90])
         slide_switch();
+
+    translate([64,6,2])
+        back_controller();
        
 }
 
@@ -209,6 +212,14 @@ module hardware_front() {
     rotate(180)
         pitft();
     translate([64,6,14])
-       controller();     
-    
+       controller();
+
+    translate([106,7,9])
+         battery(); 
 }
+
+translate([50,50,0])
+    pitft();
+
+translate([0,50,0])
+    controller();

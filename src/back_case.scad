@@ -1,4 +1,5 @@
 use <util.scad>;
+use <back_buttons.scad>;
 
 pwr_switch_offset = [98,73,4];
 
@@ -73,11 +74,35 @@ module back_case() {
                 screw_with_hole();
         }
         
-        // back
-        // TODO add L and R buttons
-        // translate([2,3,-6])
-        //  cube([130,69,2]);
+        // back side of case
+        difference() {
+            translate([2,3,-6])
+                cube([144,69,2]);
+                
+            translate([69,21,-10]) {
+                lr_button_cutout();
+                translate([0,20,0]) lr_button_cutout();
+                translate([12,0,0]) lr_button_cutout();
+                translate([12,20,0]) lr_button_cutout();
+            }
+        }
 
+        // back controller mounts
+        translate([70,11,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([70,63,-2])
+            rotate([0,180,0])
+            screw_mount();
+
+        translate([100,11,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([100,63,-2])
+            rotate([0,180,0])
+            screw_mount();
+
+        // pi 3 A+ mounts
         translate([7.5,8.5,-2])
             rotate([0,180,0])
             screw_mount();
