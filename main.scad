@@ -13,13 +13,12 @@ use <src/back_flex.scad>;
 use <src/back_buttons.scad>;
 
 module handheld() {
-    hardware_front();
-    hardware_back();
+    // hardware_front();
+    // hardware_back();
     // pitft_washers();
     // pi_washers();
     // front_case_flex();
-    // back_buttons();
-    back_case_flex();
+    // back_case_flex();
     // beveled_front_case();
     beveled_back_case();
 }

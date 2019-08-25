@@ -5,10 +5,10 @@ pwr_switch_offset = [98,73,4];
 
 module slide_switch_cutout() {
     union() {
-    translate([0,0,-2])
-     cube([4.2,11.7,8]);
-    translate([0.8,2.5,6])
-      cube([2.5,6,4]);
+        translate([0,0,-2])
+            cube([4.2,11.7,8]);
+        translate([0.8,2.5,6])
+        cube([2.5,6,4]);
     }
 }
 
@@ -68,7 +68,7 @@ module back_case() {
             // TODO make module
             translate([118,76,6])
                 rotate([0,180,0])
-                screw_with_hole();
+                #screw_with_hole();
             translate([8,76,6])
                 rotate([0,180,0])
                 screw_with_hole();
@@ -79,7 +79,7 @@ module back_case() {
             translate([2,3,-6])
                 cube([144,69,2]);
                 
-            translate([69,21,-10]) {
+            translate([69,21,-8]) {
                 lr_button_cutout();
                 translate([0,20,0]) lr_button_cutout();
                 translate([12,0,0]) lr_button_cutout();
@@ -131,9 +131,9 @@ module back_case() {
             cube([5,6,5], center=true);
             
             // hdmi
-            translate([0,38,5.5])
-            rotate([0,90,0])
-            cube([11,18,10], center=true);
+            translate([0,37.5,6])
+                rotate([0,90,0])
+                cube([10,16,10], center=true);
             
             // no micro usb hole!
             // powerboost 1000c for power

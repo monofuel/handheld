@@ -111,7 +111,7 @@ module screw_with_hole() {
     
     translate([0,0,7.9])
     // slightly oversized screw head
-    cylinder(h=15, d=5.5, center=true);
+    cylinder(h=15, d=5.8, center=true);
 }
 
 module screw_mount(screw_hole=true) {
@@ -211,7 +211,7 @@ module hardware_front() {
  translate([60,70,14])
     rotate(180)
         pitft();
-    translate([64,6,14])
+    translate([64,6,12])
        controller();
 
     translate([106,7,9])

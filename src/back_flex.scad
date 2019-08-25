@@ -7,7 +7,7 @@ module back_case_flex() {
         translate([89,21,-4])
         rotate([0,180,0]) {
 
-        translate([-2,-2,-1]) cube([24,36,0.8], center=false);
+        translate([-2,-2,0]) cube([24,36,0.4], center=false);
         back_buttons();
     }
     
