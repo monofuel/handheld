@@ -37,3 +37,26 @@ module controller() {
 			switches();
 		
 }
+
+module back_controller() {
+	x  = 40;
+	y = 62;
+	z = 1.60;
+	translate([0, 0, -z]) {
+		color("green") linear_extrude(height=z)
+			difference() {
+				hull() {
+					translate([  3,   3]) circle(r=3);
+					translate([x-3,   3]) circle(r=3);
+					translate([x-3, y-3]) circle(r=3);
+					translate([  3, y-3]) circle(r=3);
+				}
+			}
+		rotate([0,180,0]) translate([-2.5*5,2.5*7,0])  switch();
+		rotate([0,180,0]) translate([-2.5*10,2.5*7,0])  switch();
+
+		rotate([0,180,0]) translate([-2.5*5,2.5*15,0])  switch();
+		rotate([0,180,0]) translate([-2.5*10,2.5*15,0])  switch();
+	}
+
+}

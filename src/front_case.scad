@@ -12,9 +12,9 @@ option_buttons_offset = [95,7.5,18];
 module dpad_case() {
     difference() {
         translate([0,0,0]) cube([30,30,2], center=true);
-        translate([0,0,-1])
-        scale([1.1,1.1,3])
-        dpad_plus(10);
+        translate([0,0,-2])
+        scale([1.1,1.1,5])
+        dpad_plus(8, curve=false);
     }
 }
 
@@ -22,7 +22,7 @@ module button_cutout() {
      $fn=30;
     
     linear_extrude(2)
-    circle(button_size * 1.4);
+    circle(button_size * 1.5);
 }
 
 module buttons_case() {
@@ -45,7 +45,7 @@ module square_cutout(button) {
 
 module rec_button_cutout(center=true) {
     translate([0,0,0.5])
-    cube([6,9,4], center);
+    cube([5,7,4], center);
 }
 
 module option_buttons_case() {
@@ -94,38 +94,44 @@ module pitft_washers() {
             screw();
 }
 
-module controller_screw_mounts() {
+module controller_screw_mounts(screw_hole) {
+    // top left screw mount
     translate([68,9,16])
         rotate([0,180,0])
-        screw_mount();
+        screw_mount(screw_hole);
+    // top right screw mount
     translate([68,66,16])
         rotate([0,180,0])
-        screw_mount();
-    
+        screw_mount(screw_hole);
+    // lower left screw mount
     translate([100,22,16])
         rotate([0,180,0])
-        screw_mount();
-    
+        screw_mount(screw_hole);
+    // lower right screw mount
     translate([100,53,16])
         rotate([0,180,0])
-        screw_mount();
+        screw_mount(screw_hole);
 }
 
 module front_case() {
     $fn=30;
     union() {
+        // front button area
         translate(dpad_offset)  dpad_case();
         translate(buttons_offset)  buttons_case();
         translate(option_buttons_offset) option_buttons_case();
         
+        // left side gap
         translate([65,3,16])
-        cube([40,4.5,3]);
+            cube([40,4.5,3]);
+        // right side gap
         translate([65,67.5,16])
-        cube([40,4.5,3]);
-        
+            cube([40,4.5,3]);
+        // lower gap
         translate([105,3,16])
-        cube([4,69,3]);
+            cube([4,69,3]);
         
+        // piTFT
         translate([0,3,18])
         difference() {
             translate([2,0,-1])
@@ -135,24 +141,24 @@ module front_case() {
             translate([12,10,-2]) cube([40,51,5]);
             
             // pitft buttons
-            translate([4,11,-3]) {
+            translate([4.5,12,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
             
-           translate([4,21,-3]) {
+           translate([4.5,22,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,31,-3]) {
+            translate([4.5,32,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,41,-3]) {
+            translate([4.5,42,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
-            translate([4,51,-3]) {
+            translate([4.5,52,-3]) {
                 translate([-1,-2,0.9])
                 rec_button_cutout(center=false);
             }
@@ -183,16 +189,16 @@ module front_case() {
         // right side with cutout
         difference() {
             translate([2,72,10])
-            cube([130,8,9]);
+            cube([150,8,9]);
           
             translate([13,71,9])
-            cube([105,6,6]);
+            cube([85,6,6]);
             
-            translate([128,76,6])
+            // screws have to match back case
+            translate([108,76,6])
             rotate([0,180,0])
             screw();
             
-            // Has to match top case
             translate([8,76,6])
             rotate([0,180,0])
             screw();
@@ -201,7 +207,7 @@ module front_case() {
         // left side
         difference() {
             translate([2,-3,10])
-            cube([130,6,9]);
+            cube([150,6,9]);
             
             translate([128,0,6])
             rotate([0,180,0])
@@ -211,14 +217,17 @@ module front_case() {
             rotate([0,180,0])
             screw();
         }
+        // top
         translate([0,-3,10])
-        cube([2,83,9]);
+            cube([2,83,9]);
         
+        // bottom
+        translate([146,-3,10])
+            cube([3,83,9]);
 
-        translate([132,-3,10])
-        cube([3,83,9]);
+        // front below controller
         translate([109,3,16])
-        cube([23,69,3]);
+            cube([38,69,3]);
     
         controller_screw_mounts();
     }
@@ -234,10 +243,10 @@ module beveled_front_case() {
         rotate(45)
         cube(30);
         
-        translate([142,65,0])
+        translate([142 + 13,65,0])
         rotate(40)
         cube(30);
-        translate([145,-31,0])
+        translate([145 + 13,-31,0])
         rotate(50)
         cube(30);
         

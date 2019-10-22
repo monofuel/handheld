@@ -1,9 +1,8 @@
 // models for preview
 use <src/pitft.scad>;
-use <src/powerboost.scad>;
 use <src/pi.scad>
 use <src/controller.scad>;
-ues <src/util.scad>;
+use <src/util.scad>;
 
 // printed parts
 use <src/front_case.scad>;
@@ -14,15 +13,13 @@ use <src/back_flex.scad>;
 use <src/back_buttons.scad>;
 
 module handheld() {
-    hardware_front();
+    // hardware_front();
     hardware_back();
-    pitft_washers();
-    pi_washers();
-    front_case_flex();
-    back_buttons();
-    back_case_flex();
-    front_buttons();
-    beveled_front_case();
+    // pitft_washers();
+    // pi_washers();
+    // front_case_flex();
+    // back_case_flex();
+    // beveled_front_case();
     beveled_back_case();
 }
 handheld();

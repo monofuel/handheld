@@ -1,7 +1,7 @@
 use <util.scad>;
 button_spread=10;
-button_size = 3;
-button_height = 2.5;
+button_size = 4;
+button_height = 4;
 
 dpad_offset = [80,22.5,18];
 buttons_offset = [80,52.5,18];
@@ -52,20 +52,11 @@ module front_buttons() {
 }
 
 module pitft_buttons() {
-    translate([6,16.5,16.5]) 
-        rec_button();
-    
-    translate([6,26.5,16.5]) 
-        rec_button();
-    
-    translate([6,36.5,16.5]) 
-        rec_button();
-    
-    translate([6,46.5,16.5]) 
-       rec_button();
-    
-    translate([6,56.5,16.5]) 
-        rec_button();
+    translate([6,16.5,16.5])  rec_button();
+    translate([6,26.5,16.5])  rec_button();
+    translate([6,36.5,16.5])  rec_button();
+    translate([6,46.5,16.5])  rec_button();
+    translate([6,56.5,16.5])  rec_button();
 }
 
 front_buttons();

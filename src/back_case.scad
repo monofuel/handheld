@@ -1,13 +1,14 @@
 use <util.scad>;
+use <back_buttons.scad>;
 
 pwr_switch_offset = [98,73,4];
 
 module slide_switch_cutout() {
     union() {
-    translate([0,0,-2])
-     cube([4.2,11.7,8]);
-    translate([0.8,2.5,6])
-      cube([2.5,6,4]);
+        translate([0,0,-2])
+            cube([4.2,11.7,8]);
+        translate([0.8,2.5,6])
+        cube([2.5,6,4]);
     }
 }
 
@@ -42,7 +43,7 @@ module back_case() {
         // right side
         difference() {
             translate([2,72,-6])
-            cube([130,8,16]);
+            cube([150,8,16]);
           
             // cable cutout
             translate([13,71,4])
@@ -57,33 +58,53 @@ module back_case() {
             rotate([0,90,90])
             slide_switch_cutout();
             
-            // R button
-            translate([78,75,0])
-            rotate([90,0,180])
-            union() {
-                cube([8,15,3.2]);
-                cube([8,8,6]);
-            }
-            
             // powerboost usb charging
-            translate([105,74,0])
+            translate([126 - 5,74,0])
             cube([15,10,11]);
-            translate([108.5,71,2])
+            translate([129.5 - 5,71,2])
             cube([8.5,7,4]);
             
             // needs to match the front of case
             // TODO make module
-            translate([128,76,6])
+            // bottom right screw by power
+            translate([108,76,6])
                 rotate([0,180,0])
                 screw_with_hole();
+              // upper right screw
             translate([8,76,6])
                 rotate([0,180,0])
                 screw_with_hole();
         }
         
-        translate([2,3,-6])
-        cube([130,69,2]);
-        // TODO cutout for sd card space
+        // back side of case
+        difference() {
+            translate([2,3,-6])
+                cube([144,69,1]);
+                
+            translate([69,21,-8]) {
+                lr_button_cutout();
+                translate([0,20,0]) lr_button_cutout();
+                translate([12,0,0]) lr_button_cutout();
+                translate([12,20,0]) lr_button_cutout();
+            }
+        }
+
+        // back controller mounts
+        translate([70,11,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([70,63,-2])
+            rotate([0,180,0])
+            screw_mount();
+
+        translate([100,11,-2])
+            rotate([0,180,0])
+            screw_mount();
+        translate([100,63,-2])
+            rotate([0,180,0])
+            screw_mount();
+
+        // pi 3 A+ mounts
         translate([7.5,8.5,-2])
             rotate([0,180,0])
             screw_mount();
@@ -96,7 +117,9 @@ module back_case() {
         translate([56.5,66.5,-2])
             rotate([0,180,0])
             screw_mount();
+
         $fn=30;
+        // Top
         difference() {
             translate([0,-3,-6])
             cube([2,83,16]);
@@ -110,9 +133,9 @@ module back_case() {
             cube([5,6,5], center=true);
             
             // hdmi
-            translate([0,38,5.5])
-            rotate([0,90,0])
-            cube([11,18,10], center=true);
+            translate([0,37.5,6])
+                rotate([0,90,0])
+                cube([10,16,10], center=true);
             
             // no micro usb hole!
             // powerboost 1000c for power
@@ -121,18 +144,7 @@ module back_case() {
      // left side
      difference() {
             translate([2,-3,-6])
-            cube([130,6,16]);
-            
-            // L button
-            translate([70,2,0])
-            rotate([90,0,0])
-            union() {
-                cube([8,15,3.2]);
-                cube([8,8,6]);
-                // room for wires
-                translate([0,8,-3])
-                cube([8,8,6]);
-            }
+            cube([130 + 17,6,16]);
          
             translate([128,0,6])
             rotate([0,180,0])
@@ -150,20 +162,24 @@ module back_case() {
         }
         
         // powerboost mount
-        translate([120.5,68.5,-2])
-            rotate([0,180,0])
-            screw_mount();
-        translate([104.5,68.5,-2])
-            rotate([0,180,0])
-            screw_mount();
-        translate([120.5,39.5,-2])
-            rotate([0,180,0])
-            screw_mount();
-        translate([104.5,39.5,-2])
-            rotate([0,180,0])
-            screw_mount();
-        
-        translate([132,-3,-6])
+        translate([-5,0,0])
+        {
+            translate([142,69,-2])
+                rotate([0,180,0])
+                screw_mount();
+            translate([125,69,-2])
+                rotate([0,180,0])
+                screw_mount();
+            translate([140,38.2,-2])
+                rotate([0,180,0])
+                screw_mount();
+            translate([127.5,38.2,-2])
+                rotate([0,180,0])
+                screw_mount();
+        }
+
+        // bottom side
+        translate([132+14,-3,-6])
             cube([3,83,16]);
 }
 
@@ -177,10 +193,10 @@ module beveled_back_case() {
         rotate(45)
         cube(30);
         
-        translate([142,65,-8])
+        translate([142 + 13,65,-8])
         rotate(40)
         cube(30);
-        translate([145,-31,-8])
+        translate([145 + 13,-31,-8])
         rotate(50)
         cube(30);
         

@@ -1,30 +1,23 @@
-use <front_buttons.scad>;
+button_height = 3;
 
-module l_button() {
-    translate([74,-1,4])
-    rotate([90,0,0])
-    difference() {
-        square_button();
-        translate([-4,-3,1.3])
-        rotate([45,0,0])
-        cube([8,2,2]);
-    }
+module lr_button() {
+    cube([8,12,button_height], center=false);
 }
-
-module r_button() {
-    translate([74,80.5,4])
-    rotate([90,0,0])
-    difference() {
-        square_button();
-        translate([-4,-3,-1.4])
-        rotate([45,0,0])
-        cube([8,2,2]);
-    }
+module lr_button_cutout() {
+    translate([-0.5,-0.5,0])
+        cube([9,13,5], center=false);
 }
 
 module back_buttons() {
-    l_button();
-    r_button();
+    color("blue") {
+
+        translate([0,0,0]) lr_button();
+        translate([12,0,0]) lr_button();
+
+        translate([0,20,0]) lr_button();
+        translate([12,20,0]) lr_button();
+    }
+    
 }
 
 back_buttons();

@@ -1,3 +1,8 @@
+use <powerboost.scad>;
+use <pi.scad>;
+use <pitft.scad>;
+use <controller.scad>;
+
 module micro_usb() {
     color("grey")
     cube([7.7,5.5,3]);
@@ -106,19 +111,27 @@ module screw_with_hole() {
     
     translate([0,0,7.9])
     // slightly oversized screw head
-    cylinder(h=15, d=5.5, center=true);
+    cylinder(h=15, d=5.8, center=true);
 }
 
-module screw_mount() {
+module screw_mount(screw_hole=true) {
     $fn=30;
     thread_height = 7.46;
     width = 2.6; // undersized
     difference() {
         cube([6,8,4], center=true);
-        translate([0,0,1])
-        cylinder(h=thread_height, d=width, center=true);
+        if (screw_hole) {
+            translate([0,0,1]) cylinder(h=thread_height, d=width, center=true);
+        }
     }
 }
+
+translate([50,16,2])
+    screw_mount(screw_hole=false);
+
+translate([50,4,2])
+    screw_mount(screw_hole=true);
+
 module battery() {
     color("grey")
     cube([37,60,7.24]);
@@ -143,18 +156,31 @@ module slide_switch() {
       cube([2,2,2]);
 }
 
-module dpad_plus(g, extrude=1) {
+module dpad_plus(g, extrude=2, curve=true) {
     $fn=30;
     corners = 10;
-    linear_extrude(extrude)
+
+    radius = 50;
     difference() {
-        square(24, center=true);
-        translate([g,g]) square(corners, center=true);
-         rotate(90) translate([g,g]) square(corners, center=true);
-        rotate(180) translate([g,g]) square(corners, center=true);
-        rotate(270) translate([g,g]) square(corners, center=true);
+
+        linear_extrude(extrude)
+        difference() {
+            square(24, center=true);
+            translate([g,g]) square(corners, center=true);
+            rotate(90) translate([g,g]) square(corners, center=true);
+            rotate(180) translate([g,g]) square(corners, center=true);
+            rotate(270) translate([g,g]) square(corners, center=true);
+
+        }
+        if(curve){
+            translate([0,0,radius + extrude - 1])
+                sphere(radius, $fn=100);
+        }
     }
 }
+
+translate([70,12,0])
+    dpad_plus(7.8);
 
 
 module top_half() {
@@ -165,18 +191,19 @@ module top_half() {
 pwr_switch_offset = [98,73,4];
 
 module hardware_back() {
-     translate([64,6,3])
-         battery(); 
-     translate([124,72,3])
+     translate([145,72,3])
          rotate(180)
          powerboost();
-    translate([60,70,0])
+    translate([60,70,2])
     rotate(180)
         pi_3_a_plus(); 
     
     translate(pwr_switch_offset)
         rotate([0,90,90])
         slide_switch();
+
+    translate([64,6,2])
+        back_controller();
        
 }
 
@@ -184,7 +211,15 @@ module hardware_front() {
  translate([60,70,14])
     rotate(180)
         pitft();
-    translate([64,6,14])
-       controller();     
-    
+    translate([64,6,12])
+       controller();
+
+    translate([106,7,9])
+         battery(); 
 }
+
+translate([50,50,0])
+    pitft();
+
+translate([0,50,0])
+    controller();
