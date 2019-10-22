@@ -59,16 +59,18 @@ module back_case() {
             slide_switch_cutout();
             
             // powerboost usb charging
-            translate([126,74,0])
+            translate([126 - 5,74,0])
             cube([15,10,11]);
-            translate([129.5,71,2])
+            translate([129.5 - 5,71,2])
             cube([8.5,7,4]);
             
             // needs to match the front of case
             // TODO make module
-            translate([118,76,6])
+            // bottom right screw by power
+            translate([108,76,6])
                 rotate([0,180,0])
-                #screw_with_hole();
+                screw_with_hole();
+              // upper right screw
             translate([8,76,6])
                 rotate([0,180,0])
                 screw_with_hole();
@@ -77,7 +79,7 @@ module back_case() {
         // back side of case
         difference() {
             translate([2,3,-6])
-                cube([144,69,2]);
+                cube([144,69,1]);
                 
             translate([69,21,-8]) {
                 lr_button_cutout();
@@ -160,6 +162,7 @@ module back_case() {
         }
         
         // powerboost mount
+        translate([-5,0,0])
         {
             translate([142,69,-2])
                 rotate([0,180,0])

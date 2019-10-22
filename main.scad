@@ -14,7 +14,7 @@ use <src/back_buttons.scad>;
 
 module handheld() {
     // hardware_front();
-    // hardware_back();
+    hardware_back();
     // pitft_washers();
     // pi_washers();
     // front_case_flex();

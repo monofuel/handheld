@@ -8,7 +8,7 @@ module front_case_flex() {
     difference() {
         union() {
             translate([65,7,16])
-                cube([40,61,0.4]);
+                cube([40,61,0.8]);
             front_buttons();
         }
         controller_screw_mounts(screw_hole=false);
@@ -16,7 +16,7 @@ module front_case_flex() {
     color("blue")
     union() {
         translate([2,12,16.6])
-            cube([8,50,0.4]);
+            cube([8,50,0.8]);
         pitft_buttons();
         
     }

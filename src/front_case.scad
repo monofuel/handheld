@@ -192,10 +192,10 @@ module front_case() {
             cube([150,8,9]);
           
             translate([13,71,9])
-            cube([105,6,6]);
+            cube([85,6,6]);
             
             // screws have to match back case
-            translate([118,76,6])
+            translate([108,76,6])
             rotate([0,180,0])
             screw();
             
