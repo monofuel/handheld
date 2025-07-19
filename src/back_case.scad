@@ -1,7 +1,7 @@
 use <util.scad>;
 use <back_buttons.scad>;
 
-pwr_switch_offset = [98,73,4];
+pwr_switch_offset = [98,73.5,4];
 
 module slide_switch_cutout() {
     union() {

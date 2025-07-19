@@ -26,10 +26,9 @@ handheld();
 
 // TODO
 
-// back 2 screw holes for powerboost need to be closer together (not in corners)
-// front 2 powerboot screws are too far apart (slightly off)
-// fix thin bridge over power switch
-// power switch hole needs to be a little bigger
+// the 2 powerboost 1000c screw posts on the right side of the case are good
+// the 2 on the left side are not positioned properly
+
 // more support behind R button to stop it from moving
 // L and R buttons probably need more room, way too close to outside of case for soft buttons
 // model shows 3mm washers for each screw, but actaully use 4mm. I think the screw mounts need to be 1mm deeper
