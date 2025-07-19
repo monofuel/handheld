@@ -15,7 +15,9 @@ Portable retropie system inspired by the pocket pigrrl
 - 📦 needs to be printed in 2 halves, a front half and back half.
   - 🚫 **no supports needed!**
 
-- 🔧 print 12 `washer_4mm.stl` (color does not matter, these are internal) if using `4-40 x 3/8"` screws (these were the screws I had on hand, and were recommended for the pigrrl 2)
+- 🔧 print 10 `washer_4mm.stl` and 8 `washer_3mm.stl` (color does not matter, these are internal) if using `4-40 x 3/8"` screws (these were the screws I had on hand, and were recommended for the pigrrl 2)
+  - I found the 4mm washers worked good on the screws on the rear of the case, and 3mm on the front.
+  - there's probably room for improvement in using properly sized screws? but I can't be bothered when I only have 4-40 x 3/8, use whatever works for you.
 
 ### 📋 Detailed Printing Instructions
 
