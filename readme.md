@@ -26,7 +26,6 @@ Portable retropie system inspired by the pocket pigrrl
 
 #### 🧱 **PETG/PLA preferable:**
   - `front_case.stl`
-    - ⚠️ **flip upside down!**
   - `back_case.stl`
 
 #### 🌊 **Flexible plastic:**

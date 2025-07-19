@@ -267,4 +267,6 @@ module beveled_front_case() {
     }
 }
 
+// flip upside down for printing (build-side-down)
+rotate([180,0,0])
 beveled_front_case();
