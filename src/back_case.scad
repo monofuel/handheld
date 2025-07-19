@@ -130,15 +130,15 @@ module back_case() {
             // audio hole
             translate([0,16.5,4.5])
             rotate([0,90,0])
-            cylinder(h=15, d=7, center=true);
+            cylinder(h=15, d=6.5, center=true);
             // square top of audio port for easy 3D printer bridging
             translate([0,16.5,5.5])
-            cube([5,6,5], center=true);
+            cube([5,5.5,5], center=true);
             
             // hdmi
             translate([0,37.5,6])
                 rotate([0,90,0])
-                cube([10,16,10], center=true);
+                cube([9,15,9], center=true);
             
             // no pi micro usb hole!
             // powerboost 1000c for power wired up to pi.
@@ -158,8 +158,8 @@ module back_case() {
             screw_with_hole();
          
             // case hole snug around usb port
-            translate([27,-4,1])
-            cube([17,9,10]);
+            translate([28,-3,2])
+            cube([15,7,8]);
             // larger cutout around usb port for bulky connectors
             translate([35.5,-6,6])
             cube([27,15,12], center=true);
