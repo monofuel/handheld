@@ -8,6 +8,8 @@ buttons_offset = [80,52.5,18];
 option_buttons_offset = [95,7.5,18];
 
 // Assuming snes-style layout
+// IMPORTANT: these buttons have to line up with the switches on the perfboard, and on the pitft
+// their locations can't move
 
 module button() {
     // ABXY buttons

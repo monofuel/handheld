@@ -1,6 +1,8 @@
 button_height = 3;
 
 // I had extra GPIO pins on the back half and so added an extra L2 and R2
+// IMPORTANT: these buttons have to line up with the switches on the perfboard, and on the pitft
+// their locations can't move
 
 module lr_button() {
     // L1, L2, R1, R2

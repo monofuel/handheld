@@ -188,17 +188,20 @@ module front_case() {
         
         // right side with cutout
         difference() {
+
+            // primary part of the right half of the case
             translate([2,72,10])
             cube([150,8,9]);
-          
+            
+            // cutout to run cables
             translate([13,71,9])
             cube([85,6,6]);
             
-            // screws have to match back case
+            // 2 screws to hold the front and back together
+            // screw locations have to match back case
             translate([108,76,6])
             rotate([0,180,0])
             screw();
-            
             translate([8,76,6])
             rotate([0,180,0])
             screw();

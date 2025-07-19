@@ -45,11 +45,13 @@ module back_case() {
             translate([2,72,-6])
             cube([150,8,16]);
           
-            // cable cutout
+            // cable cutout channel
             translate([13,71,4])
             cube([85,6,7]);
             
-            // sd card space
+            // sd card cutout
+            // the sd card is not removable without removing the pi
+            // I found it was easy to bump and auto-eject on the pigirrl
             translate([25,71,-3])
             cube([14,3,8]);
             
@@ -59,13 +61,15 @@ module back_case() {
             slide_switch_cutout();
             
             // powerboost usb charging
+            // larger cutout for bulky adapters
             translate([126 - 5,74,0])
             cube([15,10,11]);
+            // powerboost usb charging
+            // snug inner hole for the micro usb port
             translate([129.5 - 5,71,2])
             cube([8.5,7,4]);
             
             // needs to match the front of case
-            // TODO make module
             // bottom right screw by power
             translate([108,76,6])
                 rotate([0,180,0])
@@ -80,7 +84,6 @@ module back_case() {
         difference() {
             translate([2,3,-6])
                 cube([144,69,1]);
-                
             translate([69,21,-8]) {
                 lr_button_cutout();
                 translate([0,20,0]) lr_button_cutout();
@@ -128,7 +131,7 @@ module back_case() {
             translate([0,16.5,4.5])
             rotate([0,90,0])
             cylinder(h=15, d=7, center=true);
-            // audio square cutout for bridging
+            // square top of audio port for easy 3D printer bridging
             translate([0,16.5,5.5])
             cube([5,6,5], center=true);
             
@@ -137,8 +140,8 @@ module back_case() {
                 rotate([0,90,0])
                 cube([10,16,10], center=true);
             
-            // no micro usb hole!
-            // powerboost 1000c for power
+            // no pi micro usb hole!
+            // powerboost 1000c for power wired up to pi.
     }
     
      // left side
@@ -154,9 +157,10 @@ module back_case() {
             rotate([0,180,0])
             screw_with_hole();
          
-            // usb hole
+            // case hole snug around usb port
             translate([27,-4,1])
             cube([17,9,10]);
+            // larger cutout around usb port for bulky connectors
             translate([35.5,-6,6])
             cube([27,15,12], center=true);
         }
