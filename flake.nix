@@ -14,7 +14,6 @@
         pkgs.mkShell {
           buildInputs = with pkgs; [
             openscad
-            make
           ];
         };
     };
