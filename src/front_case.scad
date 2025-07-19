@@ -199,10 +199,11 @@ module front_case() {
             
             // 2 screws to hold the front and back together
             // screw locations have to match back case
-            translate([108,76,6])
+            color("red")
+            translate([108,75,6])
             rotate([0,180,0])
             screw();
-            translate([8,76,6])
+            translate([8,75,6])
             rotate([0,180,0])
             screw();
         }

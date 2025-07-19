@@ -5,8 +5,10 @@ pwr_switch_offset = [98,73.5,4];
 
 module slide_switch_cutout() {
     union() {
+        // hole to contain the body of the power switch
         translate([0,0,-2])
             cube([4.2,11.7,8]);
+        // hole for the 'switch' of the power switch
         translate([0.7,2.4,5])
         cube([2.7,6.2,5]);
     }
@@ -71,11 +73,11 @@ module back_case() {
             
             // needs to match the front of case
             // bottom right screw by power
-            translate([108,76,6])
+            translate([108,75,6])
                 rotate([0,180,0])
                 screw_with_hole();
               // upper right screw
-            translate([8,76,6])
+            translate([8,75,6])
                 rotate([0,180,0])
                 screw_with_hole();
         }
