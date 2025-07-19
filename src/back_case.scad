@@ -7,8 +7,8 @@ module slide_switch_cutout() {
     union() {
         translate([0,0,-2])
             cube([4.2,11.7,8]);
-        translate([0.8,2.5,6])
-        cube([2.5,6,4]);
+        translate([0.7,2.4,5])
+        cube([2.7,6.2,5]);
     }
 }
 
