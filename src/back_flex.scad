@@ -1,6 +1,9 @@
 use <util.scad>;
 use <back_buttons.scad>;
 
+// This is the combination of back buttons and their flexible backing
+// this is all printed as one part in flexible material
+
 module back_case_flex() {
 
     color("blue")

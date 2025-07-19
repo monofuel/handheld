@@ -1,4 +1,4 @@
-V=0.95
+V=1.00
 DIR=v${V}
 
 .PHONY: all

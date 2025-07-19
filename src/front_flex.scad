@@ -2,6 +2,9 @@ use <util.scad>;
 use <front_buttons.scad>;
 use <front_case.scad>;
 
+// This is the combination of front buttons and their flexible backing
+// this is all printed as one part in flexible material
+
 module front_case_flex() {
     color("blue")
     
