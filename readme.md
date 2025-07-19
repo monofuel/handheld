@@ -32,17 +32,11 @@ Portable retropie system inspired by the pocket pigrrl
     - `front_buttons.stl`
     - `front_flex.stl`
 
-#### 🔘 **Back button:** 
-  - ⚠️ not sure how to handle these, need to rethink L/R positioning.
-  - `LR_button.stl` 2x
-  - `LR_flex.stl` 2x
-
 ## 🛒 Parts List
 
 💰 Parts list comes to about **$120** of hardware from Adafruit, including the battery, sd card and pi.
 
 ### 🔧 Core Components
-- ⚠️ TODO this list is not complete
 - 🥧 [Raspberry pi 3 A+](https://www.adafruit.com/product/4027)
 - 📱 [Adafruit PITFT 2.4" touchscreen](https://www.adafruit.com/product/2455)
 - 🔌 [26-pin cable](https://www.adafruit.com/product/862)
