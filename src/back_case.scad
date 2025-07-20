@@ -95,31 +95,31 @@ module back_case() {
         }
 
         // back controller mounts
-        translate([70,11,-2])
+        translate([70,11,-4])
             rotate([0,180,0])
             screw_mount();
-        translate([70,63,-2])
+        translate([70,63,-4])
             rotate([0,180,0])
             screw_mount();
 
-        translate([100,11,-2])
+        translate([100,11,-4])
             rotate([0,180,0])
             screw_mount();
-        translate([100,63,-2])
+        translate([100,63,-4])
             rotate([0,180,0])
             screw_mount();
 
         // pi 3 A+ mounts
-        translate([7.5,8.5,-2])
+        translate([7.5,8.5,-4])
             rotate([0,180,0])
             screw_mount();
-        translate([56.5,8.5,-2])
+        translate([56.5,8.5,-4])
             rotate([0,180,0])
             screw_mount();
-         translate([7.5,66.5,-2])
+         translate([7.5,66.5,-4])
             rotate([0,180,0])
             screw_mount();
-        translate([56.5,66.5,-2])
+        translate([56.5,66.5,-4])
             rotate([0,180,0])
             screw_mount();
 
@@ -168,18 +168,22 @@ module back_case() {
         }
         
         // powerboost mount
+        // in practice I skipped installing 2 of the powerboost screws
+        // I installed the 2 on the right half of the case (important for usb port)
+        // but the screw holes on the board seem smaller on the left side of the powerboost
+        // and the screw holes don't seem to line up anyway.
         translate([-5,0,0])
         {
-            translate([142,69,-2])
+            translate([142,69,-4])
                 rotate([0,180,0])
                 screw_mount();
-            translate([125,69,-2])
+            translate([125,69,-4])
                 rotate([0,180,0])
                 screw_mount();
-            translate([140,38.2,-2])
+            translate([140,38.2,-4])
                 rotate([0,180,0])
                 screw_mount();
-            translate([127.5,38.2,-2])
+            translate([127.5,38.2,-4])
                 rotate([0,180,0])
                 screw_mount();
         }
@@ -189,9 +193,49 @@ module back_case() {
             cube([3,83,16]);
 }
 
+module screw_hole_reinforcement() {
+    $fn=30;
+    // Add 1mm wall thickness around screw holes by creating hollow rings
+    // Right side screws - full height coverage
+    translate([108,75,2])
+        rotate([0,180,0])
+        difference() {
+            cylinder(h=16, d=7.8, center=true); // outer cylinder, full case height
+            cylinder(h=16, d=5.8, center=true); // inner hole, full case height
+        }
+    
+    translate([8,75,2])
+        rotate([0,180,0])
+        difference() {
+            cylinder(h=16, d=7.8, center=true);
+            cylinder(h=16, d=5.8, center=true);
+        }
+    
+    // Left side screws  
+    translate([128,0,2])
+        rotate([0,180,0])
+        difference() {
+            cylinder(h=16, d=7.8, center=true);
+            cylinder(h=16, d=5.8, center=true);
+        }
+    
+    translate([13,0,2])
+        rotate([0,180,0])
+        difference() {
+            cylinder(h=16, d=7.8, center=true);
+            cylinder(h=16, d=5.8, center=true);
+        }
+}
+
 module beveled_back_case() {
     difference() {
-        back_case();
+        union() {
+            back_case();
+            // Add reinforcement around screw holes
+            screw_hole_reinforcement();
+        }
+        
+        // Apply beveling to both case and reinforcement
         translate([-10,65,-8])
         rotate(45)
         cube(30);

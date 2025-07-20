@@ -108,9 +108,13 @@ module screw() {
 module screw_with_hole() {
     screw();
     $fn=30;
-    
+    // hole for the screw itself to thread into, slightly undersized to ensure threads can bite in.
     translate([0,0,7.9])
+
+    // This cylinder is for the hole in the back of the case for each screw
     // slightly oversized screw head
+    // the screw head is flat countersunk
+    // measured around 5.75
     cylinder(h=15, d=5.8, center=true);
 }
 
